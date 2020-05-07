@@ -65,26 +65,27 @@
                   </tr>
               </thead>
               <tbody>
+                @foreach($customer as $customer)
                   <tr>
                       <td>
                           #
                       </td>
                       <td>
-                          <a>
-                              AdminLTE v3
-                          </a>
+                          <p>
+                              {{$customer->first_name}} {{$customer->last_name}}
+                          </p>
                       </td>
                       <td>
-                          huy-567-ju
+                          {{$customer->car_reg_no}}
                       </td>
                       <td class="project_progress">
-                          09087654321
+                          {{$customer->phone}}
                       </td>
                       <td class="project_progress">
-                          15
+                          {{$customer->transaction_count}}
                       </td>
                       <td class="project_progress">
-                          50,000
+                          {{$customer->total_amount}}
                       </td>
                       <td class="project-actions text-right">
                           <a class="btn btn-primary btn-sm" href="#">
@@ -104,6 +105,7 @@
                           </a>
                       </td>
                   </tr>
+                @endforeach
               </tbody>
           </table>
         </div>
