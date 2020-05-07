@@ -68,12 +68,10 @@
                 @foreach($customer as $customer)
                   <tr>
                       <td>
-                          #
+                          {{$customer->id}}
                       </td>
                       <td>
-                          <p>
-                              {{$customer->first_name}} {{$customer->last_name}}
-                          </p>
+                        {{$customer->first_name}} {{$customer->last_name}}
                       </td>
                       <td>
                           {{$customer->car_reg_no}}
@@ -89,18 +87,15 @@
                       </td>
                       <td class="project-actions text-right">
                           <a class="btn btn-primary btn-sm" href="#">
-                              <i class="fas fa-folder">
-                              </i>
+                              <i class="fas fa-folder"></i>
                               View
                           </a>
                           <a class="btn btn-info btn-sm" href="#">
-                              <i class="fas fa-pencil-alt">
-                              </i>
+                              <i class="fas fa-pencil-alt"></i>
                               Edit
                           </a>
                           <a class="btn btn-danger btn-sm" href="#">
-                              <i class="fas fa-trash">
-                              </i>
+                              <i class="fas fa-trash"></i>
                               Delete
                           </a>
                       </td>
@@ -112,7 +107,6 @@
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
-
     </section>
     <!-- /.content -->
   </div>
