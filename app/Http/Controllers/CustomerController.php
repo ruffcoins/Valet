@@ -47,9 +47,7 @@ class CustomerController extends Controller
         $customer->phone = $request->phone;
         $customer->save();
 
-        return $customer;
-
-        return $customer;
+        return redirect()->back()->with('message', 'Customer Saved Successfully');
     }
 
     /**

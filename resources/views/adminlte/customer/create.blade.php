@@ -25,20 +25,25 @@
 
     <!-- Main content -->
     <section class="content">
-      @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-      @endif
       <form action="{{route('createCustomer')}}" method="post">
       @csrf
-        <div class="row">
+        <div class="row">         
           <div class="col-md-6 col-sm-6 offset-3">
+            @if ($errors->any())
+              <div class="alert alert-danger">
+                  <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+            @endif
+            @if(session()->has('message'))
+              <div class="alert alert-success">
+                {{session()->get('message')}}
+              </div>
+            @endif
             <div class="card card-primary">
               <div class="card-header">
                 <h3 class="card-title">Customer Information</h3>
