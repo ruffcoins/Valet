@@ -90,7 +90,7 @@
                               <i class="fas fa-folder"></i>
                               View
                           </a>
-                          <a class="btn btn-info btn-sm" href="#">
+                          <a class="btn btn-info btn-sm" href="{{route('editCustomer', $customer->id)}}">
                               <i class="fas fa-pencil-alt"></i>
                               Edit
                           </a>

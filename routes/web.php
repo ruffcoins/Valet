@@ -20,6 +20,8 @@ Route::get('home', 'PagesController@index')->name('home');
 Route::get('customers', 'CustomerController@index')->name('customerList');
 Route::get('customer/new', 'CustomerController@create')->name('newCustomer');
 Route::post('customer/new', 'CustomerController@store')->name('createCustomer');
+Route::get('customer/{customer}/edit', 'CustomerController@edit')->name('editCustomer');
+Route::patch('customer/{customer}/edit', 'CustomerController@update')->name('updateCustomer');
 
 // Sales Routes
 Route::get('sales', 'SalesController@index')->name('salesList');
