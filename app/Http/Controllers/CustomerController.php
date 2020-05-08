@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class CustomerController extends Controller
 {
@@ -40,14 +41,19 @@ class CustomerController extends Controller
             'car_reg_no' => 'required',
             'phone' => 'required',
         ]);
-        $customer = new Customer();
-        $customer->first_name = $request->first_name;
-        $customer->last_name = $request->last_name;
-        $customer->car_reg_no = $request->car_reg_no;
-        $customer->phone = $request->phone;
-        $customer->save();
 
-        return redirect()->back()->with('message', 'Customer Saved Successfully');
+        if (Customer::where('car_reg_no', '=', Input::get('car_reg_no'))->exists()) {
+            return redirect()->back()->with('error', 'Customer Already Exists');
+        }else{
+            $customer = new Customer();
+            $customer->first_name = $request->first_name;
+            $customer->last_name = $request->last_name;
+            $customer->car_reg_no = $request->car_reg_no;
+            $customer->phone = $request->phone;
+            $customer->save();
+
+            return redirect()->back()->with('success', 'Customer Saved Successfully');
+        }        
     }
 
     /**
