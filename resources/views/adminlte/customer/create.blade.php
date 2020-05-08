@@ -25,46 +25,65 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="row">
-        <div class="col-md-6 col-sm-6 offset-3">
-          <div class="card card-primary">
-            <div class="card-header">
-              <h3 class="card-title">Customer Information</h3>
+      <form action="{{route('createCustomer')}}" method="post">
+      @csrf
+        <div class="row">         
+          <div class="col-md-6 col-sm-6 offset-3">
+            @if ($errors->any())
+              <div class="alert alert-danger">
+                  <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+            @endif
+            @if(session()->has('success'))
+              <div class="alert alert-success">
+                {{session()->get('success')}}
+              </div>
+            @elseif(session()->has('error'))
+              <div class="alert alert-danger">
+                {{session()->get('error')}}
+              </div>
+            @endif
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Customer Information</h3>
 
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                  <i class="fas fa-minus"></i></button>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i></button>
+                </div>
               </div>
+              
+                <div class="card-body">
+                  <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" name="first_name" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" name="last_name" class="form-control">
+                  </div>    
+                  <div class="form-group">
+                    <label>Car Registeraton Number</label>
+                    <input type="text" name="car_reg_no" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="text" name="phone" class="form-control">
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-success float-right form-control">Add New Customer</button> 
+              
+              <!-- /.card-body -->
             </div>
-            <div class="card-body">
-              <div class="form-group">
-                <label for="inputName">First Name</label>
-                <input type="text" id="firstname" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="inputName">Last Name</label>
-                <input type="text" id="lastname" class="form-control">
-              </div>    
-              <div class="form-group">
-                <label for="inputClientCompany">Car Registeraton Number</label>
-                <input type="text" id="carregno" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="inputProjectLeader">Phone Number</label>
-                <input type="text" id="phoneno" class="form-control">
-              </div>
-            </div>
-            <!-- /.card-body -->
+            <!-- /.card -->
           </div>
-          <!-- /.card -->
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 col-sm-6 offset-3 my-10">
-          <a href="#" class="btn btn-secondary">Cancel</a>
-          <input type="submit" value="Add New Customer" class="btn btn-success float-right">
-        </div>
-      </div>
+      </form>
     </section>
     <!-- /.content -->
   </div>

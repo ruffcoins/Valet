@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class CustomerController extends Controller
 {
@@ -13,7 +15,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return view('adminlte.customer.index');
+        $customer = Customer::all();
+        return view('adminlte.customer.index', compact('customer'));
     }
 
     /**
@@ -22,7 +25,7 @@ class CustomerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {        
         return view('adminlte.customer.create');
     }
 
@@ -34,7 +37,23 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'car_reg_no' => 'required',
+            'phone' => 'required',
+        ]);
+
+        if (Customer::where('car_reg_no', '=', Input::get('car_reg_no'))->exists()) {
+            return redirect()->back()->with('error', 'Customer Already Exists');
+        }else{
+            $customer = new Customer();
+            $customer->first_name = $request->first_name;
+            $customer->last_name = $request->last_name;
+            $customer->car_reg_no = $request->car_reg_no;
+            $customer->phone = $request->phone;
+            $customer->save();
+
+            return redirect()->back()->with('success', 'Customer Saved Successfully');
+        }        
     }
 
     /**

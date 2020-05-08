@@ -19,6 +19,7 @@ Route::get('home', 'PagesController@index')->name('home');
 // Customer Routes
 Route::get('customers', 'CustomerController@index')->name('customerList');
 Route::get('customer/new', 'CustomerController@create')->name('newCustomer');
+Route::post('customer/new', 'CustomerController@store')->name('createCustomer');
 
 // Sales Routes
 Route::get('sales', 'SalesController@index')->name('salesList');

@@ -65,52 +65,48 @@
                   </tr>
               </thead>
               <tbody>
+                @foreach($customer as $customer)
                   <tr>
                       <td>
-                          #
+                          {{$customer->id}}
                       </td>
                       <td>
-                          <a>
-                              AdminLTE v3
-                          </a>
+                        {{$customer->first_name}} {{$customer->last_name}}
                       </td>
                       <td>
-                          huy-567-ju
+                          {{$customer->car_reg_no}}
                       </td>
                       <td class="project_progress">
-                          09087654321
+                          {{$customer->phone}}
                       </td>
                       <td class="project_progress">
-                          15
+                          {{$customer->transaction_count}}
                       </td>
                       <td class="project_progress">
-                          50,000
+                          {{$customer->total_amount}}
                       </td>
                       <td class="project-actions text-right">
                           <a class="btn btn-primary btn-sm" href="#">
-                              <i class="fas fa-folder">
-                              </i>
+                              <i class="fas fa-folder"></i>
                               View
                           </a>
                           <a class="btn btn-info btn-sm" href="#">
-                              <i class="fas fa-pencil-alt">
-                              </i>
+                              <i class="fas fa-pencil-alt"></i>
                               Edit
                           </a>
                           <a class="btn btn-danger btn-sm" href="#">
-                              <i class="fas fa-trash">
-                              </i>
+                              <i class="fas fa-trash"></i>
                               Delete
                           </a>
                       </td>
                   </tr>
+                @endforeach
               </tbody>
           </table>
         </div>
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
-
     </section>
     <!-- /.content -->
   </div>
