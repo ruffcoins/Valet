@@ -57,40 +57,40 @@
                       <th style="width: 10%">
                           Phone
                       </th>
-                      <th style="width: 8%" class="text-center">
+                      <th style="width: 8%" >
                           Date
                       </th>
-                      <th style="width: 10%" class="text-right">
+                      <th style="width: 10%">
                       Cost
                       </th>
                   </tr>
               </thead>
               <tbody>
+                @foreach($expense as $expense)
                   <tr>
                       <td>
-                          #
+                          {{$expense->id}}
                       </td>
                       <td>
-                        <a>
-                            AdminLTE v3
-                        </a>
+                        {{$expense->first_name}} {{$expense->last_name}}
                       </td>
                       <td>
-                          Expense name
+                        {{$expense->expense_name}}
                       </td>
                       <td>
-                          Purpose
+                        {{$expense->expense_purpose}}
                       </td>
-                      <td class="project_progress">
-                          08078766543
+                      <td>
+                        {{$expense->phone}}
                       </td>
-                      <td class="project-state">
-                          22/12/2020
+                      <td>
+                        {{$expense->expense_date}}
                       </td>
-                     <td class="text-right">
-                      <p>5000</p>
+                     <td>
+                      {{$expense->expense_cost}}
                      </td>
                   </tr>
+                @endforeach
               </tbody>
           </table>
         </div>

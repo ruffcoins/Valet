@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Expense;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class ExpensesController extends Controller
+class ExpenseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +15,8 @@ class ExpensesController extends Controller
      */
     public function index()
     {
-        return view('adminlte.expenses.index');
+        $expense = Expense::all();
+        return view('adminlte.expenses.index', compact('expense'));
     }
 
     /**
@@ -34,7 +37,26 @@ class ExpensesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'first_name' => 'required',
+            'phone' => 'required',
+            'expense_name' => 'required',
+            'expense_cost' => 'required',
+            'expense_purpose' => 'required',
+            'expense_date' => 'required',
+        ]);
+
+        $expense = Expense::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'phone' => $request->phone,
+            'expense_name' => $request->expense_name,
+            'expense_cost' => $request->expense_cost,
+            'expense_purpose' => $request->expense_purpose,
+            'expense_date' => $request->expense_date,
+        ]);
+
+        return redirect()->back()->with('success', 'Expense Saved Successfully');
     }
 
     /**
