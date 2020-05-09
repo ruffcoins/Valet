@@ -56,17 +56,18 @@
                   </tr>
               </thead>
               <tbody>
+                @foreach($service as $service)
                   <tr>
                       <td>
-                          #
+                          {{$service->id}}
                       </td>
                       <td>
                           <a>
-                              AdminLTE v3
+                              {{$service->name}}
                           </a>
                       </td>
                       <td>
-                          5000
+                          {{$service->price}}
                       </td>
                       <td class="project-actions text-right">
                           <a class="btn btn-primary btn-sm" href="#">
@@ -74,9 +75,8 @@
                               </i>
                               View
                           </a>
-                          <a class="btn btn-info btn-sm" href="#">
-                              <i class="fas fa-pencil-alt">
-                              </i>
+                          <a class="btn btn-info btn-sm" href="{{route('editService', $service->id)}}">
+                              <i class="fas fa-pencil-alt"></i>
                               Edit
                           </a>
                           <a class="btn btn-danger btn-sm" href="#">
@@ -86,6 +86,7 @@
                           </a>
                       </td>
                   </tr>
+                @endforeach
               </tbody>
           </table>
         </div>

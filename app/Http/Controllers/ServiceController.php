@@ -16,7 +16,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        return view('adminlte.services.index');
+        $service = Service::all();
+        return view('adminlte.services.index', compact('service'));
     }
 
     /**
@@ -71,9 +72,9 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Service $service)
     {
-        //
+        return view('adminlte.services.edit', compact('service'));
     }
 
     /**
@@ -83,9 +84,18 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Service $service)
     {
-        //
+        if (Service::where('name', '=', Input::get('name'))->exists()) {
+            return redirect()->back()->with('error', 'Service Already Exists');
+        }else{
+            $service->update([
+            'name' => $request->name,
+            'price' => $request->price
+            ]);
+
+            return redirect()->back()->with('success', 'Service Updated Successfully');
+        }
     }
 
     /**
