@@ -25,38 +25,55 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="row">
-        <div class="col-md-6 col-sm-6 offset-3">
-          <div class="card card-primary">
-            <div class="card-header">
-              <h3 class="card-title">Service Information</h3>
+      <form action="{{route('createService')}}" method="post">
+      @csrf
+        <div class="row">
+          <div class="col-md-6 col-sm-6 offset-3">
+            @if ($errors->any())
+              <div class="alert alert-danger">
+                  <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+            @endif
+            @if(session()->has('success'))
+              <div class="alert alert-success">
+                {{session()->get('success')}}
+              </div>
+            @elseif(session()->has('error'))
+              <div class="alert alert-danger">
+                {{session()->get('error')}}
+              </div>
+            @endif
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Service Information</h3>
 
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                  <i class="fas fa-minus"></i></button>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i></button>
+                </div>
               </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="servicename">Name</label>
+                  <input type="text" name="name" class="form-control" required="required">
+                </div>
+                <div class="form-group">
+                  <label for="serviceprice">Price</label>
+                  <input type="number" name="price" class="form-control" required="required">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-success float-right form-control">Add New Service</button>
+              <!-- /.card-body -->
             </div>
-            <div class="card-body">
-              <div class="form-group">
-                <label for="servicename">Name</label>
-                <input type="text" id="servicename" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="serviceprice">Price</label>
-                <input type="number" id="serviceprice" class="form-control">
-              </div>
-            </div>
-            <!-- /.card-body -->
+            <!-- /.card -->
           </div>
-          <!-- /.card -->
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 col-sm-6 offset-3 my-10">
-          <a href="#" class="btn btn-secondary">Cancel</a>
-          <input type="submit" value="Add New Service" class="btn btn-success float-right">
-        </div>
-      </div>
+      </form>
     </section>
     <!-- /.content -->
   </div>

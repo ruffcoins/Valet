@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Service;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 
-class ServicesController extends Controller
+class ServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +37,21 @@ class ServicesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+        ]);
+
+        if (Service::where('name', '=', Input::get('name'))->exists()) {
+            return redirect()->back()->with('error', 'Service Already Exists');
+        }else{
+            $service = Service::create([
+                'name' => $request->name,
+                'price' => $request->price
+            ]);
+
+            return redirect()->back()->with('success', 'Service Saved Successfully');
+        }
     }
 
     /**
