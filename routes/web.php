@@ -30,8 +30,9 @@ Route::get('sales', 'SalesController@index')->name('salesList');
 Route::get('sales/new', 'SalesController@create')->name('newSales');
 
 // Expenses Routes
-Route::get('expenses', 'ExpensesController@index')->name('expenseList');
-Route::get('expenses/new', 'ExpensesController@create')->name('newExpense');
+Route::get('expenses', 'ExpenseController@index')->name('expenseList');
+Route::get('expense/new', 'ExpenseController@create')->name('newExpense');
+Route::post('expense/new', 'ExpenseController@store')->name('createExpense');
 
 // Services Routes
 Route::get('services', 'ServiceController@index')->name('serviceList');

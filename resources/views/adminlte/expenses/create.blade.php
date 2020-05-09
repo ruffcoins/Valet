@@ -27,82 +27,109 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="card card-primary">
-            <div class="card-header">
-              <h3 class="card-title">Payee Information</h3>
-
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                  <i class="fas fa-minus"></i></button>
+      <form action="{{route('createExpense')}}" method="post">
+      @csrf
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            @if ($errors->any())
+              <div class="alert alert-danger">
+                  <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
               </div>
-            </div>
-            <div class="card-body">
-              <div class="form-group">
-                <label for="inputName">First Name</label>
-                <input type="text" id="firstname" class="form-control">
+            @endif
+            @if(session()->has('success'))
+              <div class="alert alert-success">
+                {{session()->get('success')}}
               </div>
-              <div class="form-group">
-                <label for="inputName">Last Name</label>
-                <input type="text" id="lastname" class="form-control">
-              </div>    
-              <div class="form-group">
-                <label for="inputProjectLeader">Phone Number</label>
-                <input type="text" id="phoneno" class="form-control">
+            @elseif(session()->has('error'))
+              <div class="alert alert-danger">
+                {{session()->get('error')}}
               </div>
-            </div>
-            <!-- /.card-body -->
+            @endif
           </div>
-          <!-- /.card -->
+          <div class="col-md-4"></div>
         </div>
-        <div class="col-md-6">
-          <div class="card card-danger">
-            <div class="card-header">
-              <h3 class="card-title">Expense Information</h3>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Payee Information</h3>
 
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                  <i class="fas fa-minus"></i></button>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i></button>
+                </div>
               </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label>First Name</label>
+                  <input type="text" name="first_name" class="form-control" required="required">
+                </div>
+                <div class="form-group">
+                  <label>Last Name</label>
+                  <input type="text" name="last_name" class="form-control">
+                </div>    
+                <div class="form-group">
+                  <label>Phone Number</label>
+                  <input type="text" name="phone" class="form-control" required="required">
+                </div>
+              </div>
+              <!-- /.card-body -->
             </div>
-            <div class="card-body">
-              <div class="form-group">
-                <label for="expensename">Name</label>
-                <input type="text" id="expensename" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="expensecost">Cost</label>
-                <input type="number" id="expensecost" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="expensepurpose">Purpose</label>
-                <input type="text" id="expensepurpose" class="form-control">
-              </div>
-              <div class="form-group">
-                <!-- Date dd/mm/yyyy -->
-                  <label>Date</label>
+            <!-- /.card -->
+          </div>
+          <div class="col-md-6">
+            <div class="card card-danger">
+              <div class="card-header">
+                <h3 class="card-title">Expense Information</h3>
 
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i></button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label>Name</label>
+                  <input type="text" name="expense_name" class="form-control" required="required">
+                </div>
+                <div class="form-group">
+                  <label>Cost</label>
+                  <input type="number" name="expense_cost" class="form-control" required="required">
+                </div>
+                <div class="form-group">
+                  <label>Purpose</label>
+                  <input type="text" name="expense_purpose" class="form-control" required="required">
+                </div>
+                <div class="form-group">
+                  <!-- Date dd/mm/yyyy -->
+                    <label>Date</label>
+
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                      </div>
+                      <input type="date" class="form-control" name="expense_date" required="required">
                     </div>
-                    <input type="text" class="form-control" name="date" id="date" placeholder="dd/mm/yyyy">
-                  </div>
-                  <!-- /.input group -->
+                    <!-- /.input group -->
+                </div>
               </div>
+              <!-- /.card-body -->
             </div>
-            <!-- /.card-body -->
+            <!-- /.card -->
           </div>
-          <!-- /.card -->
         </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <a href="#" class="btn btn-secondary">Cancel</a>
-          <input type="submit" value="Save Expense" class="btn btn-success float-right">
+        <div class="row">
+          <div class="col-sm-12">
+            <input type="submit" value="Save Expense" class="btn btn-success float-right">
+          </div>
         </div>
-      </div>
+      </form>
     </section>
     <!-- /.content -->
   </div>
