@@ -104,8 +104,10 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Service $service)
     {
-        //
+        $service->delete();
+
+        return redirect()->back()->with('success', 'Service Deleted Successfully');
     }
 }

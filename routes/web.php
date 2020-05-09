@@ -39,6 +39,7 @@ Route::get('service/new', 'ServiceController@create')->name('newService');
 Route::post('service/new', 'ServiceController@store')->name('createService');
 Route::get('service/{service}/edit', 'ServiceController@edit')->name('editService');
 Route::patch('service/{service}/edit', 'ServiceController@update')->name('updateService');
+Route::patch('service/{service}/delete', 'ServiceController@destroy')->name('deleteService');
 
 // Report Routes
 Route::get('reports/customers', 'ReportsController@customers')->name('customerReport');
