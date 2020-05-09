@@ -23,6 +23,7 @@ Route::post('customer/new', 'CustomerController@store')->name('createCustomer');
 Route::get('customer/{customer}/edit', 'CustomerController@edit')->name('editCustomer');
 Route::patch('customer/{customer}/edit', 'CustomerController@update')->name('updateCustomer');
 Route::patch('customer/{customer}/delete', 'CustomerController@destroy')->name('deleteCustomer');
+Route::get('customer/{customer}/show', 'CustomerController@show')->name('showCustomer');
 
 // Sales Routes
 Route::get('sales', 'SalesController@index')->name('salesList');
