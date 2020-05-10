@@ -26,8 +26,8 @@ Route::patch('customer/{customer}/delete', 'CustomerController@destroy')->name('
 Route::get('customer/{customer}/show', 'CustomerController@show')->name('showCustomer');
 
 // Sales Routes
-Route::get('sales', 'SalesController@index')->name('salesList');
-Route::get('sales/new', 'SalesController@create')->name('newSales');
+Route::get('sales', 'SaleController@index')->name('salesList');
+Route::get('sale/new', 'SaleController@create')->name('newSale');
 
 // Expenses Routes
 Route::get('expenses', 'ExpenseController@index')->name('expenseList');

@@ -38,25 +38,25 @@
             </div>
             <div class="card-body">
               <div class="form-group">
-                <label for="customersearch">Customer Search</label>
-                <input type="text" id="customersearch" class="form-control">
+                <label>Customer Search</label>
+                <input type="text" name="customer_search" class="form-control">
               </div>
-              <div class="form-group">
-                <label for="inputName">First Name</label>
-                <input type="text" id="firstname" class="form-control">
+              <!-- <div class="form-group">
+                <label>First Name</label>
+                <input type="text" name="firstname" class="form-control">
               </div>
               <div class="form-group">
                 <label for="inputName">Last Name</label>
-                <input type="text" id="lastname" class="form-control">
-              </div>    
+                <input type="text" name="lastname" class="form-control">
+              </div>     -->
               <div class="form-group">
                 <label for="inputClientCompany">Car Registeraton Number</label>
-                <input type="text" id="carregno" class="form-control">
+                <input type="text" name="carregno" class="form-control">
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="inputProjectLeader">Phone Number</label>
-                <input type="text" id="phoneno" class="form-control">
-              </div>
+                <input type="text" name="phoneno" class="form-control">
+              </div> -->
             </div>
             <!-- /.card-body -->
           </div>
@@ -75,15 +75,15 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="servicesearch">Service Search</label>
-                <input type="text" id="servicesearch" class="form-control">
+                <input type="text" name="servicesearch" class="form-control">
               </div>
               <div class="form-group">
                 <label for="servicename">Service Name</label>
-                <input type="text" id="servicename" class="form-control">
+                <input type="text" name="servicename" class="form-control">
               </div>
               <div class="form-group">
                 <label for="servicecharge">Service Charge</label>
-                <input type="number" id="servicecharge" class="form-control">
+                <input type="number" name="servicecharge" class="form-control">
               </div>
               <div>
                 <input type="submit" value="Add Service" class="btn btn-success float-right">
@@ -145,6 +145,10 @@
             </div>
             <div class="card-body">
               <div class="form-group">
+                <label>Server</label>
+                <input type="text" name="server" class="form-control">
+              </div>
+              <div class="form-group">
                 <!-- Date dd/mm/yyyy -->
                   <label>Date</label>
 
@@ -152,21 +156,21 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                     </div>
-                    <input type="text" class="form-control" name="date" id="date" placeholder="dd/mm/yyyy">
+                    <input type="date" class="form-control" name="date">
                   </div>
                   <!-- /.input group -->
               </div>
               <div class="form-group">
-                <label for="total">Total</label>
-                <input type="number" id="total" class="form-control">
+                <label>Total</label>
+                <input type="number" name="total" class="form-control">
               </div>
               <div class="form-group">
-                <label for="amountpaid">Amount Paid</label>
-                <input type="number" id="amountpaid" class="form-control">
+                <label>Amount Paid</label>
+                <input type="number" name="amountpaid" class="form-control">
               </div>
               <div class="form-group">
-                <label for="balance">Balance</label>
-                <input type="number" id="balance" class="form-control">
+                <label>Balance</label>
+                <input type="number" name="balance" class="form-control">
               </div>
             </div>
             <!-- /.card-body -->
