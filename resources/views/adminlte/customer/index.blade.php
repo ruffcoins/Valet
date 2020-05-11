@@ -56,16 +56,16 @@
                       <th style="width: 10%">
                           Car Reg No
                       </th>
-                      <th style="width: 20%">
+                      <th style="width: 15%">
                           Phone
                       </th>
                       <th style="width: 8%" class="text-center">
                           Transactions
                       </th>
-                      <th style="width: 18%" >
-                          Total Amount
+                      <th style="width: 13%" >
+                          Amount Spent
                       </th>
-                      <th style="width: 30%">
+                      <th style="width: 40%">
                       </th>
                   </tr>
               </thead>
