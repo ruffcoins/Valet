@@ -3,186 +3,116 @@
 @section('title', 'New Sale')
 
 @section('content')
+
 <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Enter Sale</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item">Sales</li>
-              <li class="breadcrumb-item active">New Sale</li>
-            </ol>
-          </div>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Enter Sale</h1>
         </div>
-      </div><!-- /.container-fluid -->
-    </section>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item">Sales</li>
+            <li class="breadcrumb-item active">New Sale</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
 
-    <!-- Main content -->
-    <section class="content">
+  <!-- Main content -->
+  <section class="content">
+    <form action="{{route('createSale')}}" method="post">
+      @csrf
       <div class="row">
-        <div class="col-md-4">
-          <div class="card card-primary">
-            <div class="card-header">
-              <h3 class="card-title">Customer Information</h3>
-
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                  <i class="fas fa-minus"></i></button>
-              </div>
+        <div class="col-sm-12 col-md-12">
+          @if ($errors->any())
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your input.<br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
-            <div class="card-body">
-              <div class="form-group">
-                <label for="customersearch">Customer Search</label>
-                <input type="text" id="customersearch" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="inputName">First Name</label>
-                <input type="text" id="firstname" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="inputName">Last Name</label>
-                <input type="text" id="lastname" class="form-control">
-              </div>    
-              <div class="form-group">
-                <label for="inputClientCompany">Car Registeraton Number</label>
-                <input type="text" id="carregno" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="inputProjectLeader">Phone Number</label>
-                <input type="text" id="phoneno" class="form-control">
-              </div>
+          @endif
+          @if(session()->has('success'))
+            <div class="alert alert-success">
+              {{session()->get('success')}}
             </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
+          @elseif(session()->has('error'))
+            <div class="alert alert-danger">
+              {{session()->get('error')}}
+            </div>
+          @endif
         </div>
-        <div class="col-md-5">
-          <div class="card card-secondary">
-            <div class="card-header">
-              <h3 class="card-title">Service Information</h3>
-
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                  <i class="fas fa-minus"></i></button>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="form-group">
-                <label for="servicesearch">Service Search</label>
-                <input type="text" id="servicesearch" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="servicename">Service Name</label>
-                <input type="text" id="servicename" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="servicecharge">Service Charge</label>
-                <input type="number" id="servicecharge" class="form-control">
-              </div>
-              <div>
-                <input type="submit" value="Add Service" class="btn btn-success float-right">
-              </div>
-            </div>
-            <!-- /.card-body -->
-            <div class="card-footer">
-                <table class="table table-striped projects">
-                    <thead>
-                        <tr>
-                            <th style="width: 5%">
-                                S/N
-                            </th>
-                            <th style="width: 50%">
-                                Name
-                            </th>
-                            <th style="width: 30%">
-                                Charge
-                            </th>
-                            <th style="width: 15%">
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                #
-                            </td>
-                            <td>
-                                <p>Sevice name</p>
-                            </td>
-                            <td>
-                                <p>5000</p>
-                            </td>
-                            
-                            <td class="project-actions text-right">
-                                <a class="btn btn-danger btn-sm" href="#">
-                                    <i class="fas fa-trash">
-                                    </i>
-                                    Delete
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-          </div>
-          <!-- /.card -->
-        </div>
-        <div class="col-md-3">
+      </div>
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
           <div class="card card-success">
             <div class="card-header">
-              <h3 class="card-title">Sale</h3>
+              <h3 class="card-title">Sales Information</h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                   <i class="fas fa-minus"></i></button>
               </div>
             </div>
-            <div class="card-body">
-              <div class="form-group">
-                <!-- Date dd/mm/yyyy -->
-                  <label>Date</label>
 
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                    </div>
-                    <input type="text" class="form-control" name="date" id="date" placeholder="dd/mm/yyyy">
-                  </div>
-                  <!-- /.input group -->
-              </div>
-              <div class="form-group">
-                <label for="total">Total</label>
-                <input type="number" id="total" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="amountpaid">Amount Paid</label>
-                <input type="number" id="amountpaid" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="balance">Balance</label>
-                <input type="number" id="balance" class="form-control">
+            <div class="form-group mx-5 my-3">
+              <label class="form-control">Car Registeration Number
+                <input list="customers" name="customers" class="form-control" placeholder="Search for Car Registeration Number" required="required" />
+              </label>
+              <datalist id="customers">
+                @foreach($customers as $customer)
+                  <option id="{{$customer->id}}" value="{{$customer->car_reg_no}}"></option>
+                @endforeach
+              </datalist> 
+            </div><br>
+
+            <div class="form-group mx-5 my-3">
+              <label  class="form-control">Service Name 
+                <input list="services" name="services" class="form-control" placeholder="Search for Service" required="required" />
+              </label>
+              <datalist id="services">
+                @foreach($services as $service)
+                  <option id="{{$service->id}}" value="{{$service->name}}"></option>
+                @endforeach
+              </datalist> 
+            </div>
+
+            <div class="form-group mx-5 my-3">
+              <label>Washed by whom?</label>
+              <input type="text" name="washer" class="form-control" required="required">
+            </div>
+
+            <div class="form-group mx-5 my-2">
+              <label>Date</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                </div>
+                <input type="date" class="form-control" name="date" required="required">
               </div>
             </div>
+
+            <div class="form-group mx-5 my-2">
+              <label>Total</label>
+              <input type="number" name="total" class="form-control" required="required">
+            </div>
             <!-- /.card-body -->
+          <input type="submit" value="Save Sale" class="btn btn-success float-right my-2">
           </div>
           <!-- /.card -->
         </div>
+        <div class="col-md-3"></div>
       </div>
-      <div class="row mt-10">
-        <div class="col-md-6 col-sm-6 offset-3">
-          <a href="#" class="btn btn-secondary">Cancel</a>
-          <input type="submit" value="Save Sale" class="btn btn-success float-right">
-        </div>
-      </div>
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
-  @endsection
+    </form>
+  </section>
+</div>
+@endsection

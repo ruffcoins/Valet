@@ -63,7 +63,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('newSales')}}" class="nav-link">
+                <a href="{{route('newSale')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Enter New Sales</p>
                 </a>
