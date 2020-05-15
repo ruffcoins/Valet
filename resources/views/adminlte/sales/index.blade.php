@@ -45,50 +45,46 @@
                       <th style="width: 1%">
                           S/N
                       </th>
-                      <th style="width: 30%">
-                          Customer
+                      <th style="width: 20%">
+                        Car Reg No
+                      </th>
+                      <th style="width: 20%">
+                        Service(s)
+                      </th>
+                      <th style="width: 20%">
+                        Washed By
                       </th>
                       <th style="width: 10%">
-                          Car Reg No
-                      </th>
-                      <th style="width: 10%">
-                          Service(s)
-                      </th>
-                      <th style="width: 10%">
-                          Phone
+                        Date
                       </th>
                       <th style="width: 8%" class="text-center">
-                          Date
-                      </th>
-                      <th style="width: 10%" class="text-right">
-                      Total
+                        Total
                       </th>
                   </tr>
               </thead>
               <tbody>
+                @foreach($sales as $sale)
                   <tr>
                       <td>
-                          #
+                        {{$sale->id}}
                       </td>
                       <td>
-                        <a>AdminLTE v3</a>
+                        {{$sale->customer_car_reg_no}}
                       </td>
                       <td>
-                          fkj-yui-eot
+                        {{$sale->service_name}}
                       </td>
                       <td>
-                        Carwash
+                      {{$sale->washer}}
                       </td>
                       <td class="project_progress">
-                          08103720628
+                        {{$sale->date}}
                       </td>
                       <td class="project-state">
-                          02/12/2020
+                        {{$sale->total}}
                       </td>
-                     <td class="project-actions text-right">
-                      <p>5000</p>
-                     </td>
                   </tr>
+                @endforeach
               </tbody>
           </table>
         </div>

@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <title>Valet | @yield('title')</title>
 
@@ -46,9 +47,9 @@ to get the desired effect
 <script src="{{ asset ('dist/js/adminlte.js') }}"></script>
 
 <!-- OPTIONAL SCRIPTS -->
-<script src="{{ asset ('plugins/chart.js/Chart.min.js') }}"></script>
+<!-- <script src="{{ asset ('plugins/chart.js/Chart.min.js') }}"></script>
 <script src="{{ asset ('dist/js/demo.js') }}"></script>
-<script src="{{ asset ('dist/js/pages/dashboard3.js') }}"></script>
+<script src="{{ asset ('dist/js/pages/dashboard3.js') }}"></script> -->
 <!-- date-range-picker -->
 <!-- <script src="{{ asset ('plugins/daterangepicker/daterangepicker.js') }}"></script> -->
 </body>

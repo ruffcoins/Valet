@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Sale;
+use App\Service;
+use App\Customer;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request;
 
 class SaleController extends Controller
 {
@@ -13,7 +18,8 @@ class SaleController extends Controller
      */
     public function index()
     {
-        return view('adminlte.sales.index');
+        $sales = Sale::all();
+        return view('adminlte.sales.index', compact('sales'));
     }
 
     /**
@@ -23,7 +29,9 @@ class SaleController extends Controller
      */
     public function create()
     {
-        return view('adminlte.sales.create');
+        $services = Service::all();
+        $customers = Customer::all();
+        return view('adminlte.sales.create', compact('services', 'customers'));
     }
 
     /**
@@ -34,9 +42,37 @@ class SaleController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'customers' => 'required',
+            'services' => 'required',
+            'washer' => 'required',
+            'date' => 'required',
+            'total' => 'required',
+            
+        ]);
+        
+        //Check if the input value in the car reg no field and service field can be found in the 
+        //customer and services tables respectively. if they are not found, then they would throw
+        //an error. 
+        $customerCheck = Customer::where('car_reg_no', Input::get('customers'))->first();
+        $serviceCheck = Service::where('name', Input::get('services'))->first();
 
+        if (is_null($customerCheck)) {
+            return redirect()->back()->with('error', 'Car Registeration Number Does Not Exists');
+        }elseif(is_null($serviceCheck)){
+            return redirect()->back()->with('error', 'Service Name Does Not Exists');
+        }else{
+            $sale = Sale::create([
+                'customer_car_reg_no' => $request->customers,
+                'service_name' => $request->services,
+                'washer' => $request->washer,
+                'date' => $request->date,
+                'total' => $request->total
+            ]);
+        }
+        return redirect()->back()->with('success', 'Sale Saved Successfully');
+
+    }
     /**
      * Display the specified resource.
      *
@@ -81,4 +117,5 @@ class SaleController extends Controller
     {
         //
     }
+    
 }

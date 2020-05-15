@@ -28,6 +28,7 @@ Route::get('customer/{customer}/show', 'CustomerController@show')->name('showCus
 // Sales Routes
 Route::get('sales', 'SaleController@index')->name('salesList');
 Route::get('sale/new', 'SaleController@create')->name('newSale');
+Route::post('sale/new', 'SaleController@store')->name('createSale');
 
 // Expenses Routes
 Route::get('expenses', 'ExpenseController@index')->name('expenseList');
