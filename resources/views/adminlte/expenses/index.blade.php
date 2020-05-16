@@ -69,7 +69,7 @@
                 @foreach($expense as $expense)
                   <tr>
                       <td>
-                          {{$expense->id}}
+                        {{$loop->iteration}}
                       </td>
                       <td>
                         {{$expense->first_name}} {{$expense->last_name}}

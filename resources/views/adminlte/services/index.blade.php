@@ -66,7 +66,7 @@
                 @foreach($service as $service)
                   <tr>
                       <td>
-                          {{$service->id}}
+                        {{$loop->iteration}}
                       </td>
                       <td>
                           <a>

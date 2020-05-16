@@ -66,7 +66,7 @@
                 @foreach($sales as $sale)
                   <tr>
                       <td>
-                        {{$sale->id}}
+                        {{$loop->iteration}}
                       </td>
                       <td>
                         {{$sale->customer_car_reg_no}}
