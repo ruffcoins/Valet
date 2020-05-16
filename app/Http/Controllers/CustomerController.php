@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Sale;
 use App\Customer;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 
 class CustomerController extends Controller
@@ -64,7 +66,10 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        return view('adminlte.customer.show', compact('customer'));
+
+        $sales = Sale::where('customer_car_reg_no', $customer->car_reg_no)->orderBy('date', 'desc')->get(array('service_name', 'date', 'total'));
+        
+        return view('adminlte.customer.show', compact('customer', 'sales'));
     }
 
     /**

@@ -78,7 +78,23 @@
                   </tr>
               </thead>
               <tbody>
-               <!-- Table Body -->
+              @foreach($sales as $sale)
+                <tr>
+                  <td>
+                    {{$loop->iteration}}
+                  </td>
+                  <td>
+                    {{$sale->service_name}}
+                  </td>
+                  <td>
+                    {{$sale->total}}
+                  </td>
+                  <td>
+                  {{$sale->date}}
+                  </td>
+
+                </tr>
+                @endforeach
               </tbody>
           </table>
                 </div>
