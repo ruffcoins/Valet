@@ -73,7 +73,7 @@
                 @foreach($customer as $customer)
                   <tr>
                       <td>
-                          {{$customer->id}}
+                        {{$loop->iteration}}
                       </td>
                       <td>
                         {{$customer->first_name}} {{$customer->last_name}}

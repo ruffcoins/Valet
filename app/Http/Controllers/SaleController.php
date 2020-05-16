@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Sale;
 use App\Service;
 use App\Customer;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Request;
+
 
 class SaleController extends Controller
 {
@@ -69,6 +70,9 @@ class SaleController extends Controller
                 'date' => $request->date,
                 'total' => $request->total
             ]);
+
+            Customer::where('car_reg_no', $request->customers)->increment('transaction_count');
+            Customer::where('car_reg_no', $request->customers)->increment('total_amount', $request->total);
         }
         return redirect()->back()->with('success', 'Sale Saved Successfully');
 
