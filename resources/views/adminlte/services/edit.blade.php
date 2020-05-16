@@ -1,6 +1,6 @@
 @extends('adminlte.layout.app')
 
-@section('title', 'New Service')
+@section('title', 'Edit Service')
 
 @section('content')
 
@@ -11,12 +11,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>New Service</h1>
+            <h1>Edit Service</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">New Service</li>
+              <li class="breadcrumb-item active">Edit Service</li>
             </ol>
           </div>
         </div>
@@ -25,8 +25,9 @@
 
     <!-- Main content -->
     <section class="content">
-      <form action="{{route('createService')}}" method="post">
+      <form action="{{route('editService', $service->id)}}" method="post">
       @csrf
+      @method('patch')
         <div class="row">
           <div class="col-md-6 col-sm-6 offset-3">
             @if ($errors->any())
@@ -59,15 +60,15 @@
               </div>
               <div class="card-body">
                 <div class="form-group">
-                  <label for="servicename">Name</label>
-                  <input type="text" name="name" class="form-control" required="required">
+                  <label>Name</label>
+                  <input type="text" name="name" class="form-control" required="required" value="{{$service->name}}">
                 </div>
                 <div class="form-group">
-                  <label for="serviceprice">Price</label>
-                  <input type="number" name="price" class="form-control" required="required">
+                  <label>Price</label>
+                  <input type="number" name="price" class="form-control" required="required" value="{{$service->price}}">
                 </div>
               </div>
-              <button type="submit" class="btn btn-success float-right form-control">Add New Service</button>
+              <button type="submit" class="btn btn-success float-right form-control">Update Service</button>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->

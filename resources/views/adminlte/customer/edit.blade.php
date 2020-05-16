@@ -1,9 +1,8 @@
 @extends('adminlte.layout.app')
 
-@section('title', 'New Service')
+@section('title', 'Edit Customer')
 
 @section('content')
-
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -11,12 +10,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>New Service</h1>
+            <h1>Edit Customer</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">New Service</li>
+              <li class="breadcrumb-item active">Edit Customer</li>
             </ol>
           </div>
         </div>
@@ -25,9 +24,10 @@
 
     <!-- Main content -->
     <section class="content">
-      <form action="{{route('createService')}}" method="post">
+      <form action="{{route('updateCustomer', $customer->id)}}" method="post">
       @csrf
-        <div class="row">
+      @method('patch')
+        <div class="row">         
           <div class="col-md-6 col-sm-6 offset-3">
             @if ($errors->any())
               <div class="alert alert-danger">
@@ -50,24 +50,34 @@
             @endif
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Service Information</h3>
+                <h3 class="card-title">Customer Information</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                     <i class="fas fa-minus"></i></button>
                 </div>
               </div>
-              <div class="card-body">
-                <div class="form-group">
-                  <label for="servicename">Name</label>
-                  <input type="text" name="name" class="form-control" required="required">
+              
+                <div class="card-body">
+                  <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" name="first_name" class="form-control" value="{{$customer->first_name}}">
+                  </div>
+                  <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" name="last_name" class="form-control" value="{{$customer->last_name}}">
+                  </div>    
+                  <div class="form-group">
+                    <label>Car Registeraton Number</label>
+                    <input type="text" name="car_reg_no" class="form-control" required="required" value="{{$customer->car_reg_no}}">
+                  </div>
+                  <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="text" name="phone" class="form-control" required="required" value="{{$customer->phone}}">
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label for="serviceprice">Price</label>
-                  <input type="number" name="price" class="form-control" required="required">
-                </div>
-              </div>
-              <button type="submit" class="btn btn-success float-right form-control">Add New Service</button>
+                <button type="submit" class="btn btn-success float-right form-control">Update Customer</button> 
+              
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
