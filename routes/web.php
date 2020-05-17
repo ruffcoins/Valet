@@ -47,3 +47,7 @@ Route::patch('service/{service}/delete', 'ServiceController@destroy')->name('del
 Route::get('reports/customers', 'ReportsController@customers')->name('customerReport');
 Route::get('reports/sales', 'ReportsController@sales')->name('salesReport');
 Route::get('reports/expenses', 'ReportsController@expenses')->name('expenseReport');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
