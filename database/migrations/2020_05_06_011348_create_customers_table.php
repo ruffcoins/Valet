@@ -22,6 +22,7 @@ class CreateCustomersTable extends Migration
             $table->bigInteger('transaction_count')->nullable()->default(0);
             $table->double('total_amount')->nullable()->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
