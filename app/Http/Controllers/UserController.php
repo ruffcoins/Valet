@@ -65,14 +65,25 @@ class UserController extends Controller
             $user->update([
                 'role' => null,
             ]);
-            $user->removeRole('Admin');
+            $user->syncRoles(['']);
         }else{
             $user->update([
                 'role' => $request->role,
             ]);
-            $user->assignRole($request->role);
+            $user->syncRoles([$request->role]);
         }
         
+        if (auth()->user()->role == "Supervisor" && is_null($request->role)) {
+            $user->update([
+                'role' => null,
+            ]);
+            $user->syncRoles(['']);
+        }else{
+            $user->update([
+                'role' => $request->role,
+            ]);
+            $user->syncRoles([$request->role]);
+        }
         // //Check if user can update role
         // if ($request->role == "Supervisor" && auth()->user()->role == "Supervisor" ) {
         //     $user->update([
