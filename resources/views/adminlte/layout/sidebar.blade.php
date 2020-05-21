@@ -160,14 +160,14 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add New User</p>
                 </a>
-              </li>
+              </li> -->
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('userList')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>View Users</p>
                 </a>
