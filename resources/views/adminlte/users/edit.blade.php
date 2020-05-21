@@ -65,7 +65,11 @@
                   </div>
                   <div class="form-group">
                     <label>Email</label>
+                    @if(auth()->user()->id == $user->id)
                     <input type="email" name="email" class="form-control" value="{{$user->email}}">
+                    @else
+                    <input type="email" name="email" class="form-control" value="{{$user->email}}" disabled>
+                    @endif
                   </div>    
                   <div class="form-group">
                     <label>Phone</label>
@@ -76,6 +80,7 @@
                     <label>Role</label>
                     @if(auth()->user()->role == "Admin" && $user->role == "Supervisor")
                       <select name="role" class="form-control" disabled>
+                          <option value="">{{$user->role}}</option>
                           <option value="">No Role</option>
                           @foreach($guardedRoleList as $id => $name)
                               <option>{{$name}}</option>
@@ -83,6 +88,7 @@
                       </select>
                     @else
                       <select name="role" class="form-control">
+                          <option value="">{{$user->role}}</option>
                           <option value="">No Role</option>
                           @foreach($guardedRoleList as $id => $name)
                               <option>{{$name}}</option>
