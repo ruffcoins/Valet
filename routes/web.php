@@ -49,6 +49,7 @@ Route::patch('service/{service}/delete', 'ServiceController@destroy')->name('del
 Route::get('report/customers', 'ReportsController@customers')->name('customerReport');
 Route::get('report/customers/download', 'ReportsController@customerReportDownload')->name('customerReportDownload');
 Route::get('report/sales', 'ReportsController@sales')->name('salesReport');
+Route::get('report/sales/download', 'ReportsController@saleReportDownload')->name('saleReportDownload');
 Route::get('report/expenses', 'ReportsController@expenses')->name('expenseReport');
 Route::get('report/expenses/download', 'ReportsController@expenseReportDownload')->name('expenseReportDownload');
 
