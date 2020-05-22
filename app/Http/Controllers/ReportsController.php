@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Customer;
 use PDF;
+use App\Expense;
+use App\Customer;
 use Illuminate\Http\Request;
 
 class ReportsController extends Controller
@@ -48,9 +49,29 @@ class ReportsController extends Controller
         return view('adminlte.reports.sales');
     }
 
-    public function expenses()
+    public function expenses(Expense $expense)
     {
-        return view('adminlte.reports.expenses');
+        $grandTotal = 0;
+        $expenses = $expense->all();
+
+        foreach($expenses as $expense)
+        {
+            $grandTotal += $expense->expense_cost;
+        }
+        return view('adminlte.reports.expenses', compact('expenses', 'grandTotal'));
+    }
+
+    public function expenseReportDownload(Expense $expense)
+    {
+        $grandTotal = 0;
+        $expenses = $expense->all();
+
+        foreach($expenses as $expense)
+        {
+            $grandTotal += $expense->expense_cost;
+        }
+        $pdf = PDF::loadView('adminlte.reports.expenseReport', compact('expenses', 'grandTotal'));
+        return $pdf->download('ExpenseReport.pdf');
     }
     /**
      * Display a listing of the resource.
