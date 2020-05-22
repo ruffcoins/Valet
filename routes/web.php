@@ -46,9 +46,10 @@ Route::patch('service/{service}/edit', 'ServiceController@update')->name('update
 Route::patch('service/{service}/delete', 'ServiceController@destroy')->name('deleteService')->middleware('permission:delete service');
 
 // Report Routes
-Route::get('reports/customers', 'ReportsController@customers')->name('customerReport');
-Route::get('reports/sales', 'ReportsController@sales')->name('salesReport');
-Route::get('reports/expenses', 'ReportsController@expenses')->name('expenseReport');
+Route::get('report/customers', 'ReportsController@customers')->name('customerReport');
+Route::get('report/customers/download', 'ReportsController@customerReportDownload')->name('customerReportDownload');
+Route::get('report/sales', 'ReportsController@sales')->name('salesReport');
+Route::get('report/expenses', 'ReportsController@expenses')->name('expenseReport');
 
 //User Routes
 Route::get('users', 'UserController@index')->name('userList');

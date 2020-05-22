@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
+use PDF;
 use Illuminate\Http\Request;
 
 class ReportsController extends Controller
@@ -11,9 +13,34 @@ class ReportsController extends Controller
         $this->middleware('auth');
     }
     
-    public function customers()
+    public function customers(Customer $customer)
     {
-        return view('adminlte.reports.customers');
+        $grandTotal = 0;
+        $totalTransactions = 0;
+
+        $customers = $customer->all();
+
+        foreach ($customers as $customer) {
+            $grandTotal += $customer->total_amount;
+            $totalTransactions += $customer->transaction_count;
+        }
+        
+        return view('adminlte.reports.customers', compact('customers', 'grandTotal', 'totalTransactions'));
+    }
+
+    public function customerReportDownload(Customer $customer)
+    {
+        $grandTotal = 0;
+        $totalTransactions = 0;
+
+        $customers = $customer->all();
+        foreach($customers as $customer) {
+            $grandTotal += $customer->total_amount;
+            $totalTransactions += $customer->transaction_count;
+        }
+        
+        $pdf = PDF::loadView('adminlte.reports.customerReport', compact('customers', 'grandTotal', 'totalTransactions'));
+        return $pdf->download('CustomerReport.pdf');
     }
 
     public function sales()

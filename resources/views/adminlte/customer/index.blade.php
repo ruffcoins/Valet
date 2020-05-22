@@ -53,7 +53,7 @@
                       <th style="width: 20%">
                           Customer
                       </th>
-                      <th style="width: 10%">
+                      <th style="width: 15%">
                           Car Reg No
                       </th>
                       <th style="width: 15%">
@@ -65,7 +65,7 @@
                       <th style="width: 13%" >
                           Amount Spent
                       </th>
-                      <th style="width: 40%">
+                      <th style="width: 35%">
                       </th>
                   </tr>
               </thead>
