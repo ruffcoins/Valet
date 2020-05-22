@@ -50,6 +50,7 @@ Route::get('report/customers', 'ReportsController@customers')->name('customerRep
 Route::get('report/customers/download', 'ReportsController@customerReportDownload')->name('customerReportDownload');
 Route::get('report/sales', 'ReportsController@sales')->name('salesReport');
 Route::get('report/expenses', 'ReportsController@expenses')->name('expenseReport');
+Route::get('report/expenses/download', 'ReportsController@expenseReportDownload')->name('expenseReportDownload');
 
 //User Routes
 Route::get('users', 'UserController@index')->name('userList');
