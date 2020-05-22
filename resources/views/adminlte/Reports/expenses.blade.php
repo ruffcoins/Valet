@@ -92,6 +92,15 @@
                      </td>
                   </tr>
                 @endforeach
+                <tr>
+                    <td></td>
+                    <td><strong>Grand Total</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><strong>{{$grandTotal}}.0</strong></td>
+                </tr>
               </tbody>
           </table>
         </div>
