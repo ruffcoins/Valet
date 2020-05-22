@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use PDF;
+use App\Sale;
 use App\Expense;
 use App\Customer;
 use Illuminate\Http\Request;
@@ -44,9 +45,29 @@ class ReportsController extends Controller
         return $pdf->download('CustomerReport.pdf');
     }
 
-    public function sales()
+    public function sales(Sale $sale)
     {
-        return view('adminlte.reports.sales');
+        $grandTotal = 0;
+        $sales = $sale->all();
+
+        foreach($sales as $sale)
+        {
+            $grandTotal += $sale->total;
+        }
+        return view('adminlte.reports.sales', compact('sales', 'grandTotal'));
+    }
+
+    public function saleReportDownload(Sale $sale)
+    {
+        $grandTotal = 0;
+        $sales = $sale->all();
+
+        foreach($sales as $sale)
+        {
+            $grandTotal += $sale->total;
+        }
+        $pdf = PDF::loadView('adminlte.reports.saleReport', compact('sales', 'grandTotal'));
+        return $pdf->download('SalesReport.pdf');
     }
 
     public function expenses(Expense $expense)
