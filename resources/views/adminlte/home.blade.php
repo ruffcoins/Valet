@@ -36,7 +36,7 @@
               <div class="info-box-content">
                 <span class="info-box-text">Users</span>
                 <span class="info-box-number">
-                  ??
+                  {{$userCount}}
                   <!-- <small>%</small> -->
                 </span>
               </div>
@@ -51,7 +51,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Services</span>
-                <span class="info-box-number">??</span>
+                <span class="info-box-number">{{$serviceCount}}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -67,8 +67,8 @@
               <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Sales</span>
-                <span class="info-box-number">??</span>
+                <span class="info-box-text">Transactions</span>
+                <span class="info-box-number">{{$saleCount}}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -81,7 +81,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Customers</span>
-                <span class="info-box-number">??</span>
+                <span class="info-box-number">{{$customerCount}}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
