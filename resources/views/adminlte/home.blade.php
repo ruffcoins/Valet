@@ -178,7 +178,7 @@
             <div class="col-sm-3 col-6">
               <div class="description-block border-right">
                 <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 17%</span>
-                <h5 class="description-header">₦??</h5>
+                <h5 class="description-header">₦{{$saleGrandTotal}}</h5>
                 <span class="description-text">TOTAL SALES</span>
               </div>
               <!-- /.description-block -->
@@ -187,7 +187,7 @@
             <div class="col-sm-3 col-6">
               <div class="description-block border-right">
                 <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 0%</span>
-                <h5 class="description-header">₦??</h5>
+                <h5 class="description-header">₦{{$expenseGrandTotal}}</h5>
                 <span class="description-text">TOTAL EXPENSES</span>
               </div>
               <!-- /.description-block -->
@@ -196,7 +196,7 @@
             <div class="col-sm-3 col-6">
               <div class="description-block border-right">
                 <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span>
-                <h5 class="description-header">₦??</h5>
+                <h5 class="description-header">₦{{$profit}}</h5>
                 <span class="description-text">PROFIT</span>
               </div>
               <!-- /.description-block -->
@@ -219,13 +219,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-
+  
   <!-- Main Footer -->
   <footer class="main-footer">
     <strong>Copyright &copy; 2020 Valet</a>.</strong>
