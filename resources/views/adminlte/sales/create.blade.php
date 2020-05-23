@@ -65,16 +65,14 @@
             </div>
 
             <div class="form-group mx-5 my-3">
-              <label class="form-control">Car Registeration Number
-                <input list="customers" name="customers" class="form-control" placeholder="Search for Car Registeration Number" required="required" />
-              </label>
-              <datalist id="customers">
-                @foreach($customers as $customer)
-                  <option id="{{$customer->id}}" value="{{$customer->car_reg_no}}"></option>
-                @endforeach
-              </datalist> 
-            </div><br>
-
+              <label>Car Registeration Number</label>
+              <select id="customers" name="customers" class="form-control">
+                  <option disabled selected>Select a car registeration number...</option>
+                  @foreach ($customers as $customer)
+                    <option id="{{$customer->id}}" value="{{$customer->car_reg_no}}">{{$customer->car_reg_no}}</option>
+                  @endforeach
+              </select>
+            </div>
             
             <div class="form-group mx-5 my-3">
               <label>Service Name</label>
@@ -103,7 +101,7 @@
 
             <div class="form-group mx-5 my-2">
               <label>Total</label>
-              <input type="text" name="total" id="total" class="form-control" required="required" value="">
+              <input type="text" name="total" id="total" class="form-control" required="required" value="" readonly="readonly">
             </div>
             <!-- /.card-body -->
           <input type="submit" value="Save Sale" class="btn btn-success float-right my-2">
