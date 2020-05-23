@@ -95,7 +95,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                 </div>
-                <input type="date" class="form-control" name="date" required="required">
+                <input type="date" id="date" class="form-control" name="date" required="required">
               </div>
             </div>
 
@@ -119,5 +119,11 @@
       var price = $(this).children('option:selected').data('price');
       $('#total').val(price);
   });
+
+  var now = new Date(),
+    // maximum date the user can choose, in this case now and in the future
+    maxDate = now.toISOString().substring(0,10);
+
+$('#date').prop('max', maxDate);
 </script>
 @endsection
