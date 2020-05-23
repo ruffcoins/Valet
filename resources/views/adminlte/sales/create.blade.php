@@ -75,15 +75,15 @@
               </datalist> 
             </div><br>
 
+            
             <div class="form-group mx-5 my-3">
-              <label  class="form-control">Service Name 
-                <input list="services" name="services" class="form-control" placeholder="Search for Service" required="required" />
-              </label>
-              <datalist id="services">
-                @foreach($services as $service)
-                  <option id="{{$service->id}}" value="{{$service->name}}"></option>
-                @endforeach
-              </datalist> 
+              <label>Service Name</label>
+              <select id="services" name="services" class="form-control">
+                  <option disabled selected>Select a service...</option>
+                  @foreach ($services as $service)
+                      <option value="{{ $service->name }}" data-price="{{ $service->price }}">{{ $service->name }}</option>
+                  @endforeach
+              </select>
             </div>
 
             <div class="form-group mx-5 my-3">
@@ -103,7 +103,7 @@
 
             <div class="form-group mx-5 my-2">
               <label>Total</label>
-              <input type="number" name="total" class="form-control" required="required">
+              <input type="text" name="total" id="total" class="form-control" required="required" value="">
             </div>
             <!-- /.card-body -->
           <input type="submit" value="Save Sale" class="btn btn-success float-right my-2">
@@ -115,4 +115,11 @@
     </form>
   </section>
 </div>
+<script src="{{ asset ('plugins/jquery/jquery.min.js') }}"></script>
+<script>
+    $('#services').on('change',function(){
+      var price = $(this).children('option:selected').data('price');
+      $('#total').val(price);
+  });
+</script>
 @endsection
