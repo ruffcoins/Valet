@@ -24,7 +24,10 @@ class SaleController extends Controller
      */
     public function index()
     {
+        $customer_car_reg_no = '';
+        $service_name = '';
         $sales = Sale::all();
+
         foreach($sales as $sale){
             $customer_car_reg_no = $sale->customer->car_reg_no;
             $service_name = $sale->service->name;

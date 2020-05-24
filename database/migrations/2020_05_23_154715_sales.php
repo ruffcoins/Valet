@@ -22,6 +22,7 @@ class Sales extends Migration
             $table->date('date');
             $table->string('washer');
             $table->double('total');
+            //$table->decimal('amount', 8, 2);
             $table->timestamps();
         });
 
