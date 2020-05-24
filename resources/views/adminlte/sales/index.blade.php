@@ -69,10 +69,10 @@
                         {{$loop->iteration}}
                       </td>
                       <td>
-                        {{$sale->customer_car_reg_no}}
+                        {{$customer_car_reg_no}}
                       </td>
                       <td>
-                        {{$sale->service_name}}
+                        {{$service_name}}
                       </td>
                       <td>
                       {{$sale->washer}}

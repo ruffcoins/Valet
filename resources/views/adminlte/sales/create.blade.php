@@ -69,7 +69,7 @@
               <select id="customers" name="customers" class="form-control">
                   <option disabled selected>Select a car registeration number...</option>
                   @foreach ($customers as $customer)
-                    <option id="{{$customer->id}}" value="{{$customer->car_reg_no}}">{{$customer->car_reg_no}}</option>
+                    <option id="{{$customer->id}}" value="{{$customer->id}}">{{$customer->car_reg_no}}</option>
                   @endforeach
               </select>
             </div>
@@ -79,7 +79,7 @@
               <select id="services" name="services" class="form-control">
                   <option disabled selected>Select a service...</option>
                   @foreach ($services as $service)
-                      <option value="{{ $service->name }}" data-price="{{ $service->price }}">{{ $service->name }}</option>
+                      <option value="{{ $service->id }}" data-price="{{ $service->price }}">{{ $service->name }}</option>
                   @endforeach
               </select>
             </div>
