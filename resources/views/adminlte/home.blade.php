@@ -92,40 +92,28 @@
         <div class="row">
           <div class="col-lg-6">
             <div class="card">
-              <div class="card-header border-0">
-                <div class="d-flex justify-content-between">
-                  <h3 class="card-title">Online Store Visitors</h3>
-                  <a href="javascript:void(0);">View Report</a>
-                </div>
-              </div>
+              
               <div class="card-body">
                 <div class="d-flex">
                   <p class="d-flex flex-column">
-                    <span class="text-bold text-lg">820</span>
-                    <span>Visitors Over Time</span>
+                    <!-- <span class="text-bold text-lg">820</span> -->
+                    <span class="text-bold text-lg">Sales Trends</span>
                   </p>
-                  <p class="ml-auto d-flex flex-column text-right">
+                  <!-- <p class="ml-auto d-flex flex-column text-right">
                     <span class="text-success">
                       <i class="fas fa-arrow-up"></i> 12.5%
                     </span>
                     <span class="text-muted">Since last week</span>
-                  </p>
+                  </p> -->
                 </div>
                 <!-- /.d-flex -->
 
                 <div class="position-relative mb-4">
-                  <canvas id="visitors-chart" height="200"></canvas>
-                </div>
+                  {!! $salesChart->container() !!}
 
-                <div class="d-flex flex-row justify-content-end">
-                  <span class="mr-2">
-                    <i class="fas fa-square text-primary"></i> This Week
-                  </span>
-
-                  <span>
-                    <i class="fas fa-square text-gray"></i> Last Week
-                  </span>
                 </div>
+                {!! $salesChart->script() !!}
+
               </div>
             </div>
             <!-- /.card -->
@@ -134,40 +122,28 @@
           <!-- /.col-md-6 -->
           <div class="col-lg-6">
             <div class="card">
-              <div class="card-header border-0">
-                <div class="d-flex justify-content-between">
-                  <h3 class="card-title">Sales</h3>
-                  <a href="javascript:void(0);">View Report</a>
-                </div>
-              </div>
+              
               <div class="card-body">
                 <div class="d-flex">
                   <p class="d-flex flex-column">
-                    <span class="text-bold text-lg">$18,230.00</span>
-                    <span>Sales Over Time</span>
+                    <!-- <span class="text-bold text-lg">$18,230.00</span> -->
+                    <span class="text-bold text-lg">Expense Trends</span>
                   </p>
-                  <p class="ml-auto d-flex flex-column text-right">
+                  <!-- <p class="ml-auto d-flex flex-column text-right">
                     <span class="text-success">
                       <i class="fas fa-arrow-up"></i> 33.1%
                     </span>
                     <span class="text-muted">Since last month</span>
-                  </p>
+                  </p> -->
                 </div>
                 <!-- /.d-flex -->
 
                 <div class="position-relative mb-4">
-                  <canvas id="sales-chart" height="200"></canvas>
-                </div>
+                  {!! $expenseChart->container() !!}
 
-                <div class="d-flex flex-row justify-content-end">
-                  <span class="mr-2">
-                    <i class="fas fa-square text-primary"></i> This year
-                  </span>
-
-                  <span>
-                    <i class="fas fa-square text-gray"></i> Last year
-                  </span>
                 </div>
+                {!! $expenseChart->script() !!}
+
               </div>
             </div>
             <!-- /.card -->
@@ -195,7 +171,11 @@
             <!-- /.col -->
             <div class="col-sm-3 col-6">
               <div class="description-block border-right">
-                <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span>
+              @if($profit < 0)
+                <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i>  {{$profitPercentage}}%</span>
+              @else
+              <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> {{$profitPercentage}}%</span>
+              @endif
                 <h5 class="description-header">₦{{$profit}}</h5>
                 <span class="description-text">PROFIT</span>
               </div>
