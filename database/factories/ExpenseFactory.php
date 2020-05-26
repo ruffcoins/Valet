@@ -13,7 +13,7 @@ $factory->define(Expense::class, function (Faker $faker) {
         'last_name' => $faker->lastName,
         'phone' => $faker->e164PhoneNumber,
         'expense_name' => $faker->word,
-        'expense_cost' => $faker->numberBetween($min = 1000, $max = 5000),
+        'expense_cost' => $faker->numberBetween($min = 1000, $max = 3000),
         'expense_purpose' => $faker->word,
         'expense_date' => $date,
     ];

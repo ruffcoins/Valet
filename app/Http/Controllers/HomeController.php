@@ -59,17 +59,19 @@ class HomeController extends Controller
             $expenseGrandTotal += $expense->expense_cost;
         }
 
-
         $profit = 0;
-        // $saleGrandTotal = number_format($saleGrandTotal);
-        // $expenseGrandTotal = number_format($expenseGrandTotal);
+        $profitPercentage = 0;
 
         $profit = $saleGrandTotal - $expenseGrandTotal;
 
-        $profitPercentage = ($profit/$saleGrandTotal) * 100;
-        $profitPercentage = round($profitPercentage);
-
-
+        if($saleGrandTotal > 0){
+            $profitPercentage = ($profit/$saleGrandTotal) * 100;
+            $profitPercentage = round($profitPercentage);
+        }
+        
+        $formattedProfit = number_format($profit);
+        $formattedSaleGrandTotal = number_format($saleGrandTotal);
+        $formattedExpenseGrandTotal = number_format($expenseGrandTotal);
 
         //This section is for the charts
         //THIS WEEK
@@ -149,6 +151,6 @@ class HomeController extends Controller
         ]);
         
         
-        return view('adminlte.home', compact('userCount', 'serviceCount', 'saleCount', 'customerCount', 'saleGrandTotal', 'expenseGrandTotal', 'profit', 'salesChart', 'expenseChart', 'profitPercentage'));
+        return view('adminlte.home', compact('userCount', 'serviceCount', 'saleCount', 'customerCount', 'formattedSaleGrandTotal', 'formattedExpenseGrandTotal', 'formattedProfit', 'salesChart', 'expenseChart', 'profitPercentage'));
     }
 }

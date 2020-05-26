@@ -153,8 +153,8 @@
           <div class="row">
             <div class="col-sm-3 col-6">
               <div class="description-block border-right">
-                <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 17%</span>
-                <h5 class="description-header">₦{{$saleGrandTotal}}</h5>
+                <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> ---</span>
+                <h5 class="description-header">₦{{$formattedSaleGrandTotal}}</h5>
                 <span class="description-text">TOTAL SALES</span>
               </div>
               <!-- /.description-block -->
@@ -162,8 +162,8 @@
             <!-- /.col -->
             <div class="col-sm-3 col-6">
               <div class="description-block border-right">
-                <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 0%</span>
-                <h5 class="description-header">₦{{$expenseGrandTotal}}</h5>
+                <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> ---</span>
+                <h5 class="description-header">₦{{$formattedExpenseGrandTotal}}</h5>
                 <span class="description-text">TOTAL EXPENSES</span>
               </div>
               <!-- /.description-block -->
@@ -171,12 +171,12 @@
             <!-- /.col -->
             <div class="col-sm-3 col-6">
               <div class="description-block border-right">
-              @if($profit < 0)
+              @if($formattedProfit < 0)
                 <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i>  {{$profitPercentage}}%</span>
               @else
               <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> {{$profitPercentage}}%</span>
               @endif
-                <h5 class="description-header">₦{{$profit}}</h5>
+                <h5 class="description-header">₦{{$formattedProfit}}</h5>
                 <span class="description-text">PROFIT</span>
               </div>
               <!-- /.description-block -->

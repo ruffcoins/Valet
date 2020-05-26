@@ -21,8 +21,7 @@ class Sales extends Migration
             $table->foreign('service_id')->references('id')->on('services');
             $table->date('date');
             $table->string('washer');
-            $table->double('total');
-            //$table->decimal('amount', 8, 2);
+            $table->decimal('total', 8, 2);
             $table->timestamps();
         });
 
