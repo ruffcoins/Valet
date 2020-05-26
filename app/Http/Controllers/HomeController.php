@@ -90,10 +90,27 @@ class HomeController extends Controller
             $thisWeekTotalByDate[] = $sale->orderBy('date')->where('date', $thisWeekDate)->sum('total');
         }
 
+        //Get total sales for this week
+        $thisWeekTotalSales = 0;
+
+        foreach($thisWeekTotalByDate as $totalSale){
+    
+            $thisWeekTotalSales += $totalSale;
+        }
+
+
         //sum the total amount spent of each expense made on each day this week
         //if there are 5 expenses on a particular day, it adds all 5 expenses
         foreach ($thisWeekDates as $thisWeekDate) {
             $thisWeekExpenseByDate[] = $expense->orderBy('expense_date')->where('expense_date', $thisWeekDate)->sum('expense_cost');
+        }
+
+        //Get total expenses for this week
+        $thisWeekTotalExpenses = 0;
+
+        foreach($thisWeekExpenseByDate as $totalExpense){
+    
+            $thisWeekTotalExpenses += $totalExpense;
         }
 
 
@@ -112,13 +129,51 @@ class HomeController extends Controller
             $lastWeekTotalByDate[] = $sale->orderBy('date')->where('date', $lastWeekDate) ->sum('total');
         }
 
+        //Get total sales for last week
+        $lastWeekTotalSales = 0;
+
+        foreach($lastWeekTotalByDate as $totalSale){
+    
+            $lastWeekTotalSales += $totalSale;
+        }
+
         //sum the total amount spent of each expense made on each day last week
         //if there are 5 expenses on a particular day, it adds all 5 expenses
         foreach ($lastWeekDates as $lastWeekDate) {
             $lastWeekExpenseByDate[] = $expense->orderBy('expense_date')->where('expense_date', $lastWeekDate) ->sum('expense_cost');
         }
         
+        //Get total expenses for last week
+        $lastWeekTotalExpenses = 0;
+
+        foreach($lastWeekExpenseByDate as $totalExpense){
+    
+            $lastWeekTotalExpenses += $totalExpense;
+        }
         
+        $thisWeekProfit = $thisWeekTotalSales - $thisWeekTotalExpenses;
+        $lastWeekProfit = $lastWeekTotalSales - $lastWeekTotalExpenses;
+
+
+        //This week profit percentage
+        $thisWeekProfitPercentage = 0;
+
+        if($thisWeekTotalSales > 0){
+            $thisWeekProfitPercentage = ($thisWeekProfit/$thisWeekTotalSales) * 100;
+            $thisWeekProfitPercentage = round($thisWeekProfitPercentage);
+        }
+
+        //Last week profit percentage
+        $lastWeekProfitPercentage = 0;
+
+        if($lastWeekTotalSales > 0){
+            $lastWeekProfitPercentage = ($lastWeekProfit/$lastWeekTotalSales) * 100;
+            $lastWeekProfitPercentage = round($lastWeekProfitPercentage);
+        }
+
+        //Weekly Growth Percentage
+        $weeklyGrowthPercentage = $thisWeekProfitPercentage - $lastWeekProfitPercentage;
+
         //Create Sales Chart
         $salesChart = new SalesChart;
         $salesChart->labels($thisWeekDates);
@@ -151,6 +206,6 @@ class HomeController extends Controller
         ]);
         
         
-        return view('adminlte.home', compact('userCount', 'serviceCount', 'saleCount', 'customerCount', 'formattedSaleGrandTotal', 'formattedExpenseGrandTotal', 'formattedProfit', 'salesChart', 'expenseChart', 'profitPercentage'));
+        return view('adminlte.home', compact('userCount', 'serviceCount', 'saleCount', 'customerCount', 'formattedSaleGrandTotal', 'formattedExpenseGrandTotal', 'formattedProfit', 'salesChart', 'expenseChart', 'profitPercentage', 'weeklyGrowthPercentage'));
     }
 }

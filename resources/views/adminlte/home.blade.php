@@ -184,8 +184,12 @@
             <!-- /.col -->
             <div class="col-sm-3 col-6">
               <div class="description-block">
-                <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> 18%</span>
-                <h5 class="description-header">??</h5>
+              @if($weeklyGrowthPercentage < 0)
+                <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i>  {{$weeklyGrowthPercentage}}%</span>
+              @else
+              <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> {{$weeklyGrowthPercentage}}%</span>
+              @endif
+                <h5 class="description-header">{{$weeklyGrowthPercentage}}% Increase this week</h5>
                 <span class="description-text">WEEKLY GROWTH</span>
               </div>
               <!-- /.description-block -->
