@@ -24,7 +24,7 @@ class SaleController extends Controller
      */
     public function index()
     {
-        $sales = Sale::with(['service', 'customer'])->paginate(2);
+        $sales = Sale::with(['service', 'customer'])->paginate(10);
 
         return view('adminlte.sales.index', ['data' => $sales]);
     }

@@ -24,7 +24,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::select('id','first_name', 'last_name', 'car_reg_no', 'phone', 'transaction_count', 'total_amount' )->paginate(2);
+        $customers = Customer::select('id','first_name', 'last_name', 'car_reg_no', 'phone', 'transaction_count', 'total_amount' )->paginate(10);
         return view('adminlte.customer.index', ['data' => $customers]);
     }
 
