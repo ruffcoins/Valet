@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Sale;
+use App\Service;
 use App\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -23,8 +24,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::all();
-        return view('adminlte.customer.index', compact('customers'));
+        $customers = Customer::select('id','first_name', 'last_name', 'car_reg_no', 'phone', 'transaction_count', 'total_amount' )->paginate(2);
+        return view('adminlte.customer.index', ['data' => $customers]);
     }
 
     /**
@@ -70,12 +71,16 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer)
+    public function show(Customer $customer, Service $service)
     {
-
-        $sales = Sale::where('customer_car_reg_no', $customer->car_reg_no)->orderBy('date', 'desc')->get(array('service_name', 'date', 'total'));
-        
-        return view('adminlte.customer.show', compact('customer', 'sales'));
+        //check for the customer id for this particular sale and get the following details 'service_id', 'date', 'total'
+        $sales = Sale::where('customer_id', $customer->id)->orderBy('date', 'desc')->get(array('service_id', 'date', 'total'));
+        //Get the service id for this sale and find the service name 
+        $serviceId = Sale::where('customer_id', $customer->id)->orderBy('date', 'desc')->pluck('service_id');
+        $serviceId = $service->where('id', $serviceId)->pluck('name');
+        $serviceId = str_replace(array('["', '"]'), '', $serviceId);
+          
+        return view('adminlte.customer.show', compact('customer', 'sales', 'serviceId'));
     }
 
     /**

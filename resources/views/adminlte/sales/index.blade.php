@@ -57,31 +57,31 @@
                       <th style="width: 10%">
                         Date
                       </th>
-                      <th style="width: 8%" class="text-center">
+                      <th style="width: 8%" >
                         Total
                       </th>
                   </tr>
               </thead>
               <tbody>
-                @foreach($sales as $sale)
+              @foreach($data as $key => $sales)
                   <tr>
                       <td>
-                        {{$loop->iteration}}
+                      {{ ($data->currentpage()-1) * $data->perpage() + $key + 1 }}
                       </td>
                       <td>
-                        {{$customer_car_reg_no}}
+                        {{$sales->customer->car_reg_no}}
                       </td>
                       <td>
-                        {{$service_name}}
+                        {{$sales->service->name}}
                       </td>
                       <td>
-                      {{$sale->washer}}
+                      {{$sales->washer}}
                       </td>
-                      <td class="project_progress">
-                        {{$sale->date}}
+                      <td>
+                        {{$sales->date}}
                       </td>
-                      <td class="project-state">
-                        {{$sale->total}}
+                      <td>
+                        {{$sales->total}}
                       </td>
                   </tr>
                 @endforeach
@@ -91,7 +91,9 @@
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
-
+      <div>
+        {{$data->links()}}
+      </div>
     </section>
     <!-- /.content -->
   </div>

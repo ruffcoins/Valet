@@ -24,15 +24,9 @@ class SaleController extends Controller
      */
     public function index()
     {
-        $customer_car_reg_no = '';
-        $service_name = '';
-        $sales = Sale::all();
+        $sales = Sale::with(['service', 'customer'])->paginate(2);
 
-        foreach($sales as $sale){
-            $customer_car_reg_no = $sale->customer->car_reg_no;
-            $service_name = $sale->service->name;
-        }
-        return view('adminlte.sales.index', compact('sales', 'customer_car_reg_no', 'service_name'));
+        return view('adminlte.sales.index', ['data' => $sales]);
     }
 
     /**

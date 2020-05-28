@@ -21,8 +21,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $service = Service::all();
-        return view('adminlte.services.index', compact('service'));
+        $services = Service::select('id', 'name', 'price')->paginate(10);
+        return view('adminlte.services.index', ['data' => $services]);
     }
 
     /**
