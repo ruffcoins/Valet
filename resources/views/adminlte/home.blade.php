@@ -3,7 +3,6 @@
 @section('title', 'Dashboard')
 
 @section('content')
-<div class="wrapper">
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -204,13 +203,5 @@
   </div>
   <!-- /.content-wrapper -->
   
-  <!-- Main Footer -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2020 Valet</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.0.4
-    </div>
-  </footer>
-</div>
+
 @endsection

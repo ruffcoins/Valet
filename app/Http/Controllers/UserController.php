@@ -62,8 +62,8 @@ class UserController extends Controller
         // Auth()->user()->assignRole('Supervisor');
 
 
-        $users = $user->all();
-        return view('adminlte.users.index', compact('users'));
+        $users = User::select('id', 'name', 'email', 'phone', 'role')->paginate(10);
+        return view('adminlte.users.index',  ['data' => $users]);
     }
 
     /**

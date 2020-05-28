@@ -70,10 +70,10 @@
                   </tr>
               </thead>
               <tbody>
-                @foreach($users as $user)
+                @foreach($data as $key => $user)
                   <tr>
                       <td>
-                        {{$loop->iteration}}
+                      {{ ($data->currentpage()-1) * $data->perpage() + $key + 1 }}
                       </td>
                       <td>
                         {{$user->name}}
@@ -124,6 +124,9 @@
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
+      <div>
+        {{$data->links()}}
+      </div>
     </section>
     <!-- /.content -->
   </div>

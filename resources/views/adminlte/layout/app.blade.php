@@ -33,8 +33,18 @@ to get the desired effect
 
 @include('adminlte.layout.sidebar')
 
-@yield('content')
+<div class="wrapper">
+  @yield('content')
 
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2020 Valet</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 3.0.4
+    </div>
+  </footer>
+</div>
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->

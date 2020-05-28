@@ -84,7 +84,7 @@
                     {{$loop->iteration}}
                   </td>
                   <td>
-                    {{$sale->service_name}}
+                    {{$serviceId}}
                   </td>
                   <td>
                     {{$sale->total}}
@@ -92,7 +92,6 @@
                   <td>
                   {{$sale->date}}
                   </td>
-
                 </tr>
                 @endforeach
               </tbody>

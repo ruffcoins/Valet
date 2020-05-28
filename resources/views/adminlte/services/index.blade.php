@@ -63,10 +63,10 @@
                   </tr>
               </thead>
               <tbody>
-                @foreach($service as $service)
+                @foreach($data as $key => $service)
                   <tr>
                       <td>
-                        {{$loop->iteration}}
+                        {{ ($data->currentpage()-1) * $data->perpage() + $key + 1 }}
                       </td>
                       <td>
                           <a>
@@ -109,7 +109,9 @@
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
-
+      <div>
+        {{$data->links()}}
+      </div>
     </section>
     <!-- /.content -->
   </div>
