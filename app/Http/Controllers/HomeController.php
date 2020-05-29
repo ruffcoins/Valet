@@ -153,7 +153,13 @@ class HomeController extends Controller
         $thisWeekProfit = $thisWeekTotalSales - $thisWeekTotalExpenses;
         $lastWeekProfit = $lastWeekTotalSales - $lastWeekTotalExpenses;
 
-        $weeklyGrowthPercentage = round((($thisWeekProfit - $lastWeekProfit) / $lastWeekProfit) * 100);
+        if ($lastWeekProfit == 0){
+            $weeklyGrowthPercentage = $thisWeekProfit;
+        }elseif ($thisWeekProfit == 0){
+            $weeklyGrowthPercentage = 0;
+        }else{
+            $weeklyGrowthPercentage = round((($thisWeekProfit - $lastWeekProfit) / $lastWeekProfit) * 100);
+        }
 
         //Create Sales Chart
         $salesChart = new SalesChart;

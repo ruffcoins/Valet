@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\View;
 use PDF;
 use App\Sale;
 use App\Expense;
 use App\Customer;
+use App\Service;
 use Illuminate\Http\Request;
 
 class ReportsController extends Controller
@@ -14,7 +16,7 @@ class ReportsController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function customers(Customer $customer)
     {
         $grandTotal = 0;
@@ -26,8 +28,8 @@ class ReportsController extends Controller
             $grandTotal += $customer->total_amount;
             $totalTransactions += $customer->transaction_count;
         }
-        
-        return view('adminlte.reports.customers', compact('customers', 'grandTotal', 'totalTransactions'));
+
+        return view('adminlte.reports.customers', ['data' => $customers, 'grandTotal' => $grandTotal, 'totalTransactions' => $totalTransactions]);
     }
 
     public function customerReportDownload(Customer $customer)
@@ -40,7 +42,7 @@ class ReportsController extends Controller
             $grandTotal += $customer->total_amount;
             $totalTransactions += $customer->transaction_count;
         }
-        
+
         $pdf = PDF::loadView('adminlte.reports.customerReport', compact('customers', 'grandTotal', 'totalTransactions'));
         return $pdf->download('CustomerReport.pdf');
     }
@@ -48,19 +50,20 @@ class ReportsController extends Controller
     public function sales(Sale $sale)
     {
         $grandTotal = 0;
-        $sales = $sale->all();
+        $sales = Sale::with(['service', 'customer'])->paginate(10);
 
-        foreach($sales as $sale)
-        {
-            $grandTotal += $sale->total;
+        if($sales->currentpage() == $sales->lastpage()){
+            View::share('grandTotal', $sale->sum('total'));
         }
-        return view('adminlte.reports.sales', compact('sales', 'grandTotal'));
+
+        return view('adminlte.reports.sales', ['data' => $sales]);
     }
 
     public function saleReportDownload(Sale $sale)
     {
         $grandTotal = 0;
-        $sales = $sale->all();
+
+        $sales = Sale::with(['service', 'customer'])->get();
 
         foreach($sales as $sale)
         {

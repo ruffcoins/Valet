@@ -65,43 +65,47 @@
                   </tr>
               </thead>
               <tbody>
-                @foreach($sales as $sale)
+              @foreach($data as $key => $sales)
                   <tr>
                       <td>
-                        {{$loop->iteration}}
+                          {{ ($data->currentpage()-1) * $data->perpage() + $key + 1 }}
                       </td>
                       <td>
-                        {{$sale->customer_car_reg_no}}
+                        {{$sales->customer->car_reg_no}}
                       </td>
                       <td>
-                        {{$sale->service_name}}
+                        {{$sales->service->name}}
                       </td>
                       <td>
-                      {{$sale->washer}}
+                      {{$sales->washer}}
                       </td>
                       <td>
-                        {{$sale->date}}
+                        {{$sales->date}}
                       </td>
                       <td>
-                        {{$sale->total}}
+                        {{$sales->total}}
                       </td>
                   </tr>
-                @endforeach
-                <tr>
-                    <td></td>
-                    <td><strong>Grand Total</strong></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><strong>{{$grandTotal}}.0</strong></td>
-                </tr>
+              @endforeach
+              @if($data->currentpage() == $data->lastpage())
+                  <tr>
+                      <td></td>
+                      <td><strong>Grand Total</strong></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td><strong>₦{{$grandTotal}}</strong></td>
+                  </tr>
+              @endif
               </tbody>
           </table>
         </div>
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
-
+        <div>
+            {{$data->links()}}
+        </div>
     </section>
     <!-- /.content -->
   </div>

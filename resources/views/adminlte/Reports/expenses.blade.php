@@ -99,7 +99,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><strong>{{$grandTotal}}.0</strong></td>
+                    <td><strong>₦{{$grandTotal}}</strong></td>
                 </tr>
               </tbody>
           </table>

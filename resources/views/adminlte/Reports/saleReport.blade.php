@@ -82,10 +82,10 @@
             {{$loop->iteration}}
           </td>
           <td class="tg-phtq">
-            {{$sale['customer_car_reg_no']}}
+            {{$sale->customer['car_reg_no']}}
           </td>
           <td class="tg-phtq">
-              {{$sale['service_name']}}
+              {{$sale->service['name']}}
           </td>
           <td class="tg-phtq">
               {{$sale['washer']}}
@@ -104,11 +104,11 @@
         <td class="tg-0pky"></td>
         <td class="tg-0pky"></td>
         <td class="tg-0pky"></td>
-        <td class="tg-0pky"><strong>{{$grandTotal}}.0</strong></td>
+        <td class="tg-0pky"><strong>{{$grandTotal}}</strong></td>
       </tr>
     </tbody>
   </table>
 
 </center>
-  
+
 
