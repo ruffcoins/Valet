@@ -10,8 +10,6 @@ use App\Customer;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use App\Charts\SalesChart;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
@@ -32,7 +30,7 @@ class HomeController extends Controller
      */
     public function index(User $user, Service $service, Sale $sale, Customer $customer, Expense $expense)
     {
-        //dashboard top strip 
+        //dashboard top strip
         $users = $user->all();
         $userCount = $users->count();
 
@@ -68,7 +66,7 @@ class HomeController extends Controller
             $profitPercentage = ($profit/$saleGrandTotal) * 100;
             $profitPercentage = round($profitPercentage);
         }
-        
+
         $formattedProfit = number_format($profit);
         $formattedSaleGrandTotal = number_format($saleGrandTotal);
         $formattedExpenseGrandTotal = number_format($expenseGrandTotal);
@@ -83,7 +81,7 @@ class HomeController extends Controller
             $thisWeekDates[] = $thisWeekDate->format('Y-m-d');
         }
 
-        
+
         //sum the total amount spent of each sale made on each day this week
         //if there are 5 sales on a particular day, it adds all 5 sales
         foreach ($thisWeekDates as $thisWeekDate) {
@@ -94,7 +92,7 @@ class HomeController extends Controller
         $thisWeekTotalSales = 0;
 
         foreach($thisWeekTotalByDate as $totalSale){
-    
+
             $thisWeekTotalSales += $totalSale;
         }
 
@@ -109,7 +107,7 @@ class HomeController extends Controller
         $thisWeekTotalExpenses = 0;
 
         foreach($thisWeekExpenseByDate as $totalExpense){
-    
+
             $thisWeekTotalExpenses += $totalExpense;
         }
 
@@ -122,7 +120,7 @@ class HomeController extends Controller
             $lastWeekDates[] = $lastWeekDate->format('Y-m-d');
         }
 
-        
+
         //sum the total amount spent of each sale made on each day last week
         //if there are 5 sales on a particular day, it adds all 5 sales
         foreach ($lastWeekDates as $lastWeekDate) {
@@ -133,7 +131,7 @@ class HomeController extends Controller
         $lastWeekTotalSales = 0;
 
         foreach($lastWeekTotalByDate as $totalSale){
-    
+
             $lastWeekTotalSales += $totalSale;
         }
 
@@ -142,37 +140,40 @@ class HomeController extends Controller
         foreach ($lastWeekDates as $lastWeekDate) {
             $lastWeekExpenseByDate[] = $expense->orderBy('expense_date')->where('expense_date', $lastWeekDate) ->sum('expense_cost');
         }
-        
+
         //Get total expenses for last week
         $lastWeekTotalExpenses = 0;
 
         foreach($lastWeekExpenseByDate as $totalExpense){
-    
+
             $lastWeekTotalExpenses += $totalExpense;
         }
-        
+
+
         $thisWeekProfit = $thisWeekTotalSales - $thisWeekTotalExpenses;
         $lastWeekProfit = $lastWeekTotalSales - $lastWeekTotalExpenses;
 
+        $weeklyGrowthPercentage = round((($thisWeekProfit - $lastWeekProfit) / $lastWeekProfit) * 100);
 
-        //This week profit percentage
-        $thisWeekProfitPercentage = 0;
+//        //This week profit percentage
+//        $thisWeekProfitPercentage = 0;
+//
+//        if($thisWeekTotalExpenses > 0){
+//            $thisWeekProfitPercentage = ($thisWeekProfit/$thisWeekTotalExpenses) * 100;
+//            $thisWeekProfitPercentage = round($thisWeekProfitPercentage);
+//        }
+//
+//        //Last week profit percentage
+//        $lastWeekProfitPercentage = 0;
+//
+//        if($lastWeekTotalExpenses > 0){
+//            $lastWeekProfitPercentage = ($lastWeekProfit/$lastWeekTotalExpenses) * 100;
+//            $lastWeekProfitPercentage = round($lastWeekProfitPercentage);
+//        }
+//
+//        //Weekly Growth Percentage
+//        $weeklyGrowthPercentage = $thisWeekProfitPercentage - $lastWeekProfitPercentage;
 
-        if($thisWeekTotalSales > 0){
-            $thisWeekProfitPercentage = ($thisWeekProfit/$thisWeekTotalSales) * 100;
-            $thisWeekProfitPercentage = round($thisWeekProfitPercentage);
-        }
-
-        //Last week profit percentage
-        $lastWeekProfitPercentage = 0;
-
-        if($lastWeekTotalSales > 0){
-            $lastWeekProfitPercentage = ($lastWeekProfit/$lastWeekTotalSales) * 100;
-            $lastWeekProfitPercentage = round($lastWeekProfitPercentage);
-        }
-
-        //Weekly Growth Percentage
-        $weeklyGrowthPercentage = $thisWeekProfitPercentage - $lastWeekProfitPercentage;
 
         //Create Sales Chart
         $salesChart = new SalesChart;
@@ -204,8 +205,8 @@ class HomeController extends Controller
             'borderColor' => 'rgba(168,168,168)',
             'fill' => false,
         ]);
-        
-        
+
+
         return view('adminlte.home', compact('userCount', 'serviceCount', 'saleCount', 'customerCount', 'formattedSaleGrandTotal', 'formattedExpenseGrandTotal', 'formattedProfit', 'salesChart', 'expenseChart', 'profitPercentage', 'weeklyGrowthPercentage'));
     }
 }
