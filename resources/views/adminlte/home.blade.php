@@ -91,7 +91,7 @@
         <div class="row">
           <div class="col-lg-6">
             <div class="card">
-              
+
               <div class="card-body">
                 <div class="d-flex">
                   <p class="d-flex flex-column">
@@ -116,12 +116,12 @@
               </div>
             </div>
             <!-- /.card -->
-            
+
           </div>
           <!-- /.col-md-6 -->
           <div class="col-lg-6">
             <div class="card">
-              
+
               <div class="card-body">
                 <div class="d-flex">
                   <p class="d-flex flex-column">
@@ -146,7 +146,7 @@
               </div>
             </div>
             <!-- /.card -->
-          </div>           
+          </div>
           </div>
           <!-- /.col-md-6 -->
           <div class="row">
@@ -161,7 +161,7 @@
             <!-- /.col -->
             <div class="col-sm-3 col-6">
               <div class="description-block border-right">
-                <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> ---</span>
+                <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> ---</span>
                 <h5 class="description-header">₦{{$formattedExpenseGrandTotal}}</h5>
                 <span class="description-text">TOTAL EXPENSES</span>
               </div>
@@ -172,11 +172,14 @@
               <div class="description-block border-right">
               @if($formattedProfit < 0)
                 <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i>  {{$profitPercentage}}%</span>
+                  <h5 class="description-header">₦{{$formattedProfit}}</h5>
+                  <span class="description-text">TOTAL LOSS</span>
               @else
-              <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> {{$profitPercentage}}%</span>
+                  <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> {{$profitPercentage}}%</span>
+                  <h5 class="description-header">₦{{$formattedProfit}}</h5>
+                  <span class="description-text">TOTAL PROFIT</span>
               @endif
-                <h5 class="description-header">₦{{$formattedProfit}}</h5>
-                <span class="description-text">PROFIT</span>
+
               </div>
               <!-- /.description-block -->
             </div>
@@ -185,11 +188,14 @@
               <div class="description-block">
               @if($weeklyGrowthPercentage < 0)
                 <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i>  {{$weeklyGrowthPercentage}}%</span>
+                      <h5 class="description-header">{{$weeklyGrowthPercentage}}% Decrease this week</h5>
+                      <span class="description-text">WEEKLY GROWTH</span>
               @else
               <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> {{$weeklyGrowthPercentage}}%</span>
+                      <h5 class="description-header">{{$weeklyGrowthPercentage}}% Increase this week</h5>
+                      <span class="description-text">WEEKLY GROWTH</span>
               @endif
-                <h5 class="description-header">{{$weeklyGrowthPercentage}}% Increase this week</h5>
-                <span class="description-text">WEEKLY GROWTH</span>
+
               </div>
               <!-- /.description-block -->
             </div>
@@ -200,8 +206,6 @@
       <!-- /.container-fluid -->
     </div>
     <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  
+
 
 @endsection
