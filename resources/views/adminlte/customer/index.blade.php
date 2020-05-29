@@ -53,7 +53,7 @@
                       <th style="width: 20%">
                           Customer
                       </th>
-                      <th style="width: 10%">
+                      <th style="width: 15%">
                           Car Reg No
                       </th>
                       <th style="width: 15%">
@@ -65,15 +65,15 @@
                       <th style="width: 13%" >
                           Amount Spent
                       </th>
-                      <th style="width: 40%">
+                      <th style="width: 35%">
                       </th>
                   </tr>
               </thead>
               <tbody>
-                @foreach($customer as $customer)
+                @foreach($data as $key => $customer)
                   <tr>
                       <td>
-                        {{$loop->iteration}}
+                      {{ ($data->currentpage()-1) * $data->perpage() + $key + 1 }}
                       </td>
                       <td>
                         {{$customer->first_name}} {{$customer->last_name}}
@@ -95,26 +95,29 @@
                               <i class="fas fa-folder"></i>
                               View
                           </a>
-                          <a class="btn btn-info btn-sm" href="{{route('editCustomer', $customer->id)}}">
-                              <i class="fas fa-pencil-alt"></i>
-                              Edit
-                          </a>
-                          <span>
-                            <span class="btn btn-danger btn-sm" onclick="event.preventDefault();
-                                if(confirm('Are you sure?')){
-                                    document.getElementById('form-delete-{{$customer->id}}')
-                                    .submit()
-                                }">
-                              <i class="fas fa-trash"></i>
-                              Delete
-                            </span>
+                          @role('Admin|Supervisor')
+                            <a class="btn btn-info btn-sm" href="{{route('editCustomer', $customer->id)}}">
+                                <i class="fas fa-pencil-alt"></i>
+                                Edit
+                            </a>
+                          @endrole
+                          @role('Supervisor')
+                            <span>
+                              <span class="btn btn-danger btn-sm" onclick="event.preventDefault();
+                                  if(confirm('Are you sure?')){
+                                      document.getElementById('form-delete-{{$customer->id}}')
+                                      .submit()
+                                  }">
+                                <i class="fas fa-trash"></i>
+                                Delete
+                              </span>
 
-                            <form action="{{route('deleteCustomer', $customer->id)}}" id="{{'form-delete-'.$customer->id}}" method="post" style="display:none;">
-                                @csrf
-                                @method('patch')
-                            </form>
-                          </span>
-                            
+                              <form action="{{route('deleteCustomer', $customer->id)}}" id="{{'form-delete-'.$customer->id}}" method="post" style="display:none;">
+                                  @csrf
+                                  @method('patch')
+                              </form>
+                            </span>
+                          @endrole
                       </td>
                   </tr>
                 @endforeach
@@ -124,6 +127,9 @@
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
+      <div>
+        {{$data->links()}}
+      </div>
     </section>
     <!-- /.content -->
   </div>

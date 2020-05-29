@@ -15,7 +15,7 @@
           <img src="{{asset ('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
         </div>
       </div>
 
@@ -160,14 +160,14 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add New User</p>
                 </a>
-              </li>
+              </li> -->
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('userList')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>View Users</p>
                 </a>

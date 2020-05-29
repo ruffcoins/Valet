@@ -19,7 +19,7 @@ class CreateExpensesTable extends Migration
             $table->string('last_name');
             $table->string('phone');
             $table->string('expense_name');
-            $table->double('expense_cost');
+            $table->decimal('expense_cost', 8, 2);
             $table->text('expense_purpose');
             $table->date('expense_date');
             $table->timestamps();

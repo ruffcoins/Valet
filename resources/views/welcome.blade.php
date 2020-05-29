@@ -47,6 +47,9 @@
             .title {
                 font-size: 84px;
             }
+            .sub-title {
+                font-size: 41px;
+            }
 
             .links > a {
                 color: #636b6f;
@@ -82,6 +85,9 @@
             <div class="content">
                 <div class="title m-b-md">
                     Valet
+                </div>
+                <div class="sub-title m-b-md">
+                    Car Wash Management System
                 </div>
 
                 <div class="links">

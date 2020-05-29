@@ -11,13 +11,11 @@
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{ asset ('plugins/fontawesome-free/css/all.min.css') }}">
   <!-- IonIcons -->
-  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="{{ asset ('dist/css/ionicons.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset ('dist/css/adminlte.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  <!-- daterange picker -->
-  <!-- <link rel="stylesheet" href="{{ asset ('plugins/daterangepicker/daterangepicker.css') }}"> -->
+  <link href="{{ asset ('font/sanspro.css') }}" rel="stylesheet">
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -35,8 +33,18 @@ to get the desired effect
 
 @include('adminlte.layout.sidebar')
 
-@yield('content')
+<div class="wrapper">
+  @yield('content')
 
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2020 Valet</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 3.0.4
+    </div>
+  </footer>
+</div>
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
@@ -47,10 +55,8 @@ to get the desired effect
 <script src="{{ asset ('dist/js/adminlte.js') }}"></script>
 
 <!-- OPTIONAL SCRIPTS -->
-<!-- <script src="{{ asset ('plugins/chart.js/Chart.min.js') }}"></script>
+<script src="{{ asset ('plugins/chart.js/Chart.min.js') }}"></script>
 <script src="{{ asset ('dist/js/demo.js') }}"></script>
-<script src="{{ asset ('dist/js/pages/dashboard3.js') }}"></script> -->
-<!-- date-range-picker -->
-<!-- <script src="{{ asset ('plugins/daterangepicker/daterangepicker.js') }}"></script> -->
+<script src="{{ asset ('dist/js/pages/dashboard3.js') }}"></script>
 </body>
 </html>

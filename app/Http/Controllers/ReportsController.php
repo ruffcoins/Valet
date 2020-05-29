@@ -2,23 +2,97 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
+use App\Sale;
+use App\Expense;
+use App\Customer;
 use Illuminate\Http\Request;
 
 class ReportsController extends Controller
 {
-    public function customers()
+    public function __construct()
     {
-        return view('adminlte.reports.customers');
+        $this->middleware('auth');
+    }
+    
+    public function customers(Customer $customer)
+    {
+        $grandTotal = 0;
+        $totalTransactions = 0;
+
+        $customers = $customer->all();
+
+        foreach ($customers as $customer) {
+            $grandTotal += $customer->total_amount;
+            $totalTransactions += $customer->transaction_count;
+        }
+        
+        return view('adminlte.reports.customers', compact('customers', 'grandTotal', 'totalTransactions'));
     }
 
-    public function sales()
+    public function customerReportDownload(Customer $customer)
     {
-        return view('adminlte.reports.sales');
+        $grandTotal = 0;
+        $totalTransactions = 0;
+
+        $customers = $customer->all();
+        foreach($customers as $customer) {
+            $grandTotal += $customer->total_amount;
+            $totalTransactions += $customer->transaction_count;
+        }
+        
+        $pdf = PDF::loadView('adminlte.reports.customerReport', compact('customers', 'grandTotal', 'totalTransactions'));
+        return $pdf->download('CustomerReport.pdf');
     }
 
-    public function expenses()
+    public function sales(Sale $sale)
     {
-        return view('adminlte.reports.expenses');
+        $grandTotal = 0;
+        $sales = $sale->all();
+
+        foreach($sales as $sale)
+        {
+            $grandTotal += $sale->total;
+        }
+        return view('adminlte.reports.sales', compact('sales', 'grandTotal'));
+    }
+
+    public function saleReportDownload(Sale $sale)
+    {
+        $grandTotal = 0;
+        $sales = $sale->all();
+
+        foreach($sales as $sale)
+        {
+            $grandTotal += $sale->total;
+        }
+        $pdf = PDF::loadView('adminlte.reports.saleReport', compact('sales', 'grandTotal'));
+        return $pdf->download('SalesReport.pdf');
+    }
+
+    public function expenses(Expense $expense)
+    {
+        $grandTotal = 0;
+        $expenses = $expense->all();
+
+        foreach($expenses as $expense)
+        {
+            $grandTotal += $expense->expense_cost;
+        }
+        return view('adminlte.reports.expenses', compact('expenses', 'grandTotal'));
+    }
+
+    public function expenseReportDownload(Expense $expense)
+    {
+        $grandTotal = 0;
+        $expenses = $expense->all();
+
+        foreach($expenses as $expense)
+        {
+            $grandTotal += $expense->expense_cost;
+        }
+        $pdf = PDF::loadView('adminlte.reports.expenseReport', compact('expenses', 'grandTotal'));
+        return $pdf->download('ExpenseReport.pdf');
     }
     /**
      * Display a listing of the resource.

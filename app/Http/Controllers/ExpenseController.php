@@ -8,6 +8,11 @@ use App\Http\Controllers\Controller;
 
 class ExpenseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +20,8 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        $expense = Expense::all();
-        return view('adminlte.expenses.index', compact('expense'));
+        $expenses = Expense::select('id', 'first_name', 'last_name', 'phone', 'expense_name', 'expense_cost', 'expense_purpose', 'expense_date')->paginate(10);
+        return view('adminlte.expenses.index', ['data' => $expenses]);
     }
 
     /**

@@ -65,25 +65,23 @@
             </div>
 
             <div class="form-group mx-5 my-3">
-              <label class="form-control">Car Registeration Number
-                <input list="customers" name="customers" class="form-control" placeholder="Search for Car Registeration Number" required="required" />
-              </label>
-              <datalist id="customers">
-                @foreach($customers as $customer)
-                  <option id="{{$customer->id}}" value="{{$customer->car_reg_no}}"></option>
-                @endforeach
-              </datalist> 
-            </div><br>
-
+              <label>Car Registeration Number</label>
+              <select id="customers" name="customers" class="form-control">
+                  <option disabled selected>Select a car registeration number...</option>
+                  @foreach ($customers as $customer)
+                    <option id="{{$customer->id}}" value="{{$customer->id}}">{{$customer->car_reg_no}}</option>
+                  @endforeach
+              </select>
+            </div>
+            
             <div class="form-group mx-5 my-3">
-              <label  class="form-control">Service Name 
-                <input list="services" name="services" class="form-control" placeholder="Search for Service" required="required" />
-              </label>
-              <datalist id="services">
-                @foreach($services as $service)
-                  <option id="{{$service->id}}" value="{{$service->name}}"></option>
-                @endforeach
-              </datalist> 
+              <label>Service Name</label>
+              <select id="services" name="services" class="form-control">
+                  <option disabled selected>Select a service...</option>
+                  @foreach ($services as $service)
+                      <option value="{{ $service->id }}" data-price="{{ $service->price }}">{{ $service->name }}</option>
+                  @endforeach
+              </select>
             </div>
 
             <div class="form-group mx-5 my-3">
@@ -97,13 +95,13 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                 </div>
-                <input type="date" class="form-control" name="date" required="required">
+                <input type="date" id="date" class="form-control" name="date" required="required">
               </div>
             </div>
 
             <div class="form-group mx-5 my-2">
               <label>Total</label>
-              <input type="number" name="total" class="form-control" required="required">
+              <input type="text" name="total" id="total" class="form-control" required="required" value="" readonly="readonly">
             </div>
             <!-- /.card-body -->
           <input type="submit" value="Save Sale" class="btn btn-success float-right my-2">
@@ -115,4 +113,17 @@
     </form>
   </section>
 </div>
+<script src="{{ asset ('plugins/jquery/jquery.min.js') }}"></script>
+<script>
+    $('#services').on('change',function(){
+      var price = $(this).children('option:selected').data('price');
+      $('#total').val(price);
+  });
+
+  var now = new Date(),
+    // maximum date the user can choose, in this case now and in the future
+    maxDate = now.toISOString().substring(0,10);
+
+$('#date').prop('max', maxDate);
+</script>
 @endsection
