@@ -114,7 +114,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                       </div>
-                      <input type="date" class="form-control" name="expense_date" required="required">
+                      <input type="date" id="date" class="form-control" name="expense_date" required="required">
                     </div>
                     <!-- /.input group -->
                 </div>
@@ -134,4 +134,13 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+<script src="{{ asset ('plugins/jquery/jquery.min.js') }}"></script>
+
+  <script>
+      var now = new Date(),
+    // maximum date the user can choose, in this case now and in the future
+    maxDate = now.toISOString().substring(0,10);
+
+    $('#date').prop('max', maxDate);
+  </script>
 @endsection

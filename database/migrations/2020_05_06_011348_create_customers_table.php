@@ -20,8 +20,9 @@ class CreateCustomersTable extends Migration
             $table->string('car_reg_no')->unique()->nullable(false);
             $table->string('phone');
             $table->bigInteger('transaction_count')->nullable()->default(0);
-            $table->double('total_amount')->nullable()->default(0);
+            $table->decimal('total_amount', 8, 2)->nullable()->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

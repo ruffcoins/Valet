@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Input;
 
 class ServiceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +21,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $service = Service::all();
-        return view('adminlte.services.index', compact('service'));
+        $services = Service::select('id', 'name', 'price')->paginate(10);
+        return view('adminlte.services.index', ['data' => $services]);
     }
 
     /**

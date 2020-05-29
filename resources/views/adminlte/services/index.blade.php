@@ -63,10 +63,10 @@
                   </tr>
               </thead>
               <tbody>
-                @foreach($service as $service)
+                @foreach($data as $key => $service)
                   <tr>
                       <td>
-                        {{$loop->iteration}}
+                        {{ ($data->currentpage()-1) * $data->perpage() + $key + 1 }}
                       </td>
                       <td>
                           <a>
@@ -77,10 +77,13 @@
                           {{$service->price}}
                       </td>
                       <td class="project-actions text-right">
+                        @role('Admin|Supervisor')
                           <a class="btn btn-info btn-sm" href="{{route('editService', $service->id)}}">
                               <i class="fas fa-pencil-alt"></i>
                               Edit
                           </a>
+                        @endrole
+                        @role('Supervisor')
                           <span>
                             <span class="btn btn-danger btn-sm" onclick="event.preventDefault();
                                 if(confirm('Are you sure?')){
@@ -96,6 +99,7 @@
                                 @method('patch')
                             </form>
                           </span>
+                        @endrole
                       </td>
                   </tr>
                 @endforeach
@@ -105,7 +109,9 @@
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
-
+      <div>
+        {{$data->links()}}
+      </div>
     </section>
     <!-- /.content -->
   </div>

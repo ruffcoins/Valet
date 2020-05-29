@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Input;
 
 class SaleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -19,8 +24,9 @@ class SaleController extends Controller
      */
     public function index()
     {
-        $sales = Sale::all();
-        return view('adminlte.sales.index', compact('sales'));
+        $sales = Sale::with(['service', 'customer'])->paginate(10);
+
+        return view('adminlte.sales.index', ['data' => $sales]);
     }
 
     /**
@@ -55,8 +61,9 @@ class SaleController extends Controller
         //Check if the input value in the car reg no field and service field can be found in the 
         //customer and services tables respectively. if they are not found, then they would throw
         //an error. 
-        $customerCheck = Customer::where('car_reg_no', Input::get('customers'))->first();
-        $serviceCheck = Service::where('name', Input::get('services'))->first();
+
+        $customerCheck = Customer::where('id', Input::get('customers'))->first();
+        $serviceCheck = Service::where('id', Input::get('services'))->first();
 
         if (is_null($customerCheck)) {
             return redirect()->back()->with('error', 'Car Registeration Number Does Not Exists');
@@ -64,15 +71,15 @@ class SaleController extends Controller
             return redirect()->back()->with('error', 'Service Name Does Not Exists');
         }else{
             $sale = Sale::create([
-                'customer_car_reg_no' => $request->customers,
-                'service_name' => $request->services,
+                'customer_id' => $request->customers,
+                'service_id' => $request->services,
                 'washer' => $request->washer,
                 'date' => $request->date,
                 'total' => $request->total
             ]);
 
-            Customer::where('car_reg_no', $request->customers)->increment('transaction_count');
-            Customer::where('car_reg_no', $request->customers)->increment('total_amount', $request->total);
+            Customer::where('id', $request->customers)->increment('transaction_count');
+            Customer::where('id', $request->customers)->increment('total_amount', $request->total);
         }
         return redirect()->back()->with('success', 'Sale Saved Successfully');
 
