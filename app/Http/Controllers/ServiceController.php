@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Service;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 
 class ServiceController extends Controller
@@ -13,7 +12,7 @@ class ServiceController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -91,16 +90,12 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
-        if (Service::where('name', '=', Input::get('name'))->exists()) {
-            return redirect()->back()->with('error', 'Service Already Exists');
-        }else{
-            $service->update([
-            'name' => $request->name,
-            'price' => $request->price
-            ]);
+        $service->update([
+        'name' => $request->name,
+        'price' => $request->price
+        ]);
 
-            return redirect()->back()->with('success', 'Service Updated Successfully');
-        }
+        return redirect()->back()->with('success', 'Service Updated Successfully');
     }
 
     /**
