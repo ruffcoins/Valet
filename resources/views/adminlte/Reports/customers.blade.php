@@ -39,7 +39,7 @@
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">Customers</h3>
-          
+
           <div class="card-tools">
           <a href="{{ route('customerReportDownload') }}" class="btn btn-success ">Save as PDF</a>
             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -71,50 +71,48 @@
                   </tr>
               </thead>
               <tbody>
-                @foreach($customers as $customer)
+              @foreach($data as $key => $customers)
                 <tr>
                   <td>
-                    {{$loop->iteration}}
+                      {{ $loop->iteration }}
                   </td>
                   <td>
-                    {{$customer['first_name']}} {{$customer['last_name']}}
+                    {{$customers->first_name}} {{$customers->last_name}}
                   </td>
                   <td>
-                      {{$customer['car_reg_no']}}
+                      {{$customers->car_reg_no}}
                   </td>
                   <td class="project_progress">
-                      {{$customer['phone']}}
+                      {{$customers->phone}}
                   </td>
                   <td class="project_progress">
-                      {{$customer['transaction_count']}}
+                      {{$customers->transaction_count}}
                   </td>
                   <td class="project_progress">
-                      {{$customer['total_amount']}}
+                      {{$customers->total_amount}}
                   </td>
-                </tr>                      
+                </tr>
                 @endforeach
-                <tr>
+
+                  <tr>
                     <td></td>
                     <td><strong>Grand Total</strong></td>
                     <td></td>
                     <td></td>
                     <td><strong>{{$totalTransactions}}</strong></td>
                     <td><strong> ₦ {{$grandTotal}}</strong></td>
-                </tr>
+                  </tr>
+
               </tbody>
           </table>
         </div>
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
+
     </section>
     <!-- /.content -->
   </div>
-  <script>
-    $('.print-window').click(function() {
-        window.print();
-    });
-  </script>
 
   <!-- /.content-wrapper -->
 @endsection
