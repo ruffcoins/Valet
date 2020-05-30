@@ -78,13 +78,13 @@
                   </tr>
               </thead>
               <tbody>
-              @foreach($sales as $sale)
+              @foreach($sales as $index => $sale)
                 <tr>
                   <td>
                     {{$loop->iteration}}
                   </td>
                   <td>
-                    {{$serviceId}}
+                      {{str_replace(array('["', '"]'), '',$name[$index])}}
                   </td>
                   <td>
                     {{$sale->total}}
