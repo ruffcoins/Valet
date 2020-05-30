@@ -78,6 +78,9 @@ class CustomerController extends Controller
 
         //Get the service id for this sale and find the service name
         $serviceId = Sale::where('customer_id', $customer->id)->orderBy('date', 'desc')->pluck('service_id');
+        if($customer->transaction_count == 0){
+            $name = '';
+        }
         foreach ($serviceId as $id){
             $name[] = $service->where('id', $id)->pluck('name');
         }
