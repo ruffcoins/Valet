@@ -6,7 +6,6 @@ use App\Sale;
 use App\Service;
 use App\Customer;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 
 class CustomerController extends Controller
@@ -16,7 +15,7 @@ class CustomerController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -34,7 +33,7 @@ class CustomerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {        
+    {
         return view('adminlte.customer.create');
     }
 
@@ -62,25 +61,28 @@ class CustomerController extends Controller
             $customer->save();
 
             return redirect()->back()->with('success', 'Customer Saved Successfully');
-        }        
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Customer $customer
+     * @param Service $service
      * @return \Illuminate\Http\Response
      */
     public function show(Customer $customer, Service $service)
     {
         //check for the customer id for this particular sale and get the following details 'service_id', 'date', 'total'
         $sales = Sale::where('customer_id', $customer->id)->orderBy('date', 'desc')->get(array('service_id', 'date', 'total'));
-        //Get the service id for this sale and find the service name 
+
+        //Get the service id for this sale and find the service name
         $serviceId = Sale::where('customer_id', $customer->id)->orderBy('date', 'desc')->pluck('service_id');
-        $serviceId = $service->where('id', $serviceId)->pluck('name');
-        $serviceId = str_replace(array('["', '"]'), '', $serviceId);
-          
-        return view('adminlte.customer.show', compact('customer', 'sales', 'serviceId'));
+        foreach ($serviceId as $id){
+            $name[] = $service->where('id', $id)->pluck('name');
+        }
+
+        return view('adminlte.customer.show', compact('customer', 'sales', 'name'));
     }
 
     /**
